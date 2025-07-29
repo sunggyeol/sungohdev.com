@@ -99,7 +99,10 @@ export default function Page() {
   };
 
   return (
-    <PublicationLayout title="Publications">
+    <PublicationLayout 
+      title="Publications"
+      description="Conference Proceedings, Lightly Reviewed Papers, Posters, and Abstracts"
+    >
       <div className="space-y-6">
         {publications.map((pub, index) => (
           <div
