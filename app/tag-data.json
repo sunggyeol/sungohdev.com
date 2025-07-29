@@ -1,17 +1,1 @@
-{
-  "openai": 1,
-  "agents-sdk": 1,
-  "llm": 2,
-  "ai-agents": 1,
-  "api-reference": 1,
-  "anthropic": 1,
-  "mcp": 1,
-  "ai-integration": 1,
-  "open-source": 1,
-  "ai": 3,
-  "prompt-engineering": 1,
-  "llms": 1,
-  "rag": 2,
-  "fine-tuning": 1,
-  "nlp": 2
-}
+{"anthropic":1,"mcp":1,"ai-integration":1,"llm":2,"open-source":1,"rag":2,"fine-tuning":1,"nlp":2,"ai":3,"prompt-engineering":1,"llms":1,"openai":1,"agents-sdk":1,"ai-agents":1,"api-reference":1}
