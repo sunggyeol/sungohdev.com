@@ -99,7 +99,7 @@ export default function Page() {
   };
 
   return (
-    <PublicationLayout 
+    <PublicationLayout
       title="Publications"
       description="Conference Proceedings, Lightly Reviewed Papers, Posters, and Abstracts"
     >
