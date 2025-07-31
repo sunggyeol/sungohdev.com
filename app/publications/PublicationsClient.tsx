@@ -1,60 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { Publications } from "contentlayer/generated";
 
-export default function PublicationsClient() {
+interface PublicationsClientProps {
+  publications: Publications[];
+}
+
+export default function PublicationsClient({
+  publications,
+}: PublicationsClientProps) {
   const [filter, setFilter] = useState("all");
-
-  const publications = [
-    {
-      title:
-        "Optimizing Diary Studies Learning Outcomes with Fine-Tuned Large Language Models on the DiaryQuest Platform",
-      authors:
-        "Sunggyeol Oh, Jiacheng Zhao, Carson Russo, Michael Bolmer Jr, Jihoo Jeong, Jixiang Fan, Yusheng Cao, Wei Lu Wang, Natalie Andrus, and Scott McCrickard",
-      conference:
-        "Proceedings of the IEEE Frontiers in Education Conference (Accepted)",
-      conferenceShort: "FIE",
-      year: "2025",
-      type: "conference", // Full conference proceedings
-      links: [{ type: "PDF", url: "/static/pdfs/25-fie-optimizing.pdf" }],
-    },
-    {
-      title:
-        "Structuring Collaborative Reflection: Integrating Diary Study and Focus Group Discussion",
-      authors:
-        "Jixiang Fan, Jiacheng Zhao, Sunggyeol Oh, Michael Bolmer Jr, Yoonje Lee, Nick Flammer, Yuhao Chen, and D. Scott McCrickard",
-      conference:
-        "Companion Publication of the 2025 Conference on Computer-Supported Cooperative Work and Social Computing (Accepted)",
-      conferenceShort: "CSCW",
-      year: "2025",
-      type: "lightly-reviewed", // Companion publication
-      links: [{ type: "PDF", url: "/static/pdfs/25-cscw-structuring.pdf" }],
-    },
-    {
-      title:
-        "Boosting Diary Study Outcomes with a Fine-Tuned Large Language Model",
-      authors:
-        "Sunggyeol Oh, Jiacheng Zhao, Carson Russo, and Michael Bolmer Jr",
-      conference:
-        "Proceedings of the Extended Abstracts of the CHI Conference on Human Factors in Computing Systems",
-      conferenceShort: "CHI",
-      year: "2025",
-      type: "lightly-reviewed", // Extended abstracts
-      links: [{ type: "DOI", url: "https://doi.org/10.1145/3706599.3719287" }],
-    },
-    {
-      title:
-        "Explore Public's Perspectives on Generative AI in Computer Science (CS) Education: A Social Media Data Analysis",
-      authors: "Sunggyeol Oh, Yi Cao, Andrew Katz, and Jialu Zhao",
-      conference: "Proceedings of the IEEE Frontiers in Education Conference",
-      conferenceShort: "FIE",
-      year: "2024",
-      type: "conference", // Full conference proceedings
-      links: [
-        { type: "DOI", url: "https://doi.org/10.1109/FIE61694.2024.10893102" },
-      ],
-    },
-  ];
 
   const getBadgeWidth = (text) => {
     // Calculate width: base width + character count * width per character
@@ -131,7 +87,7 @@ export default function PublicationsClient() {
 
   const filteredPublications = publications.filter((pub) => {
     if (filter === "all") return true;
-    return pub.type === filter;
+    return pub.publicationType === filter;
   });
 
   const filterButtons = [
@@ -139,12 +95,15 @@ export default function PublicationsClient() {
     {
       key: "conference",
       label: "Conference Proceedings",
-      count: publications.filter((p) => p.type === "conference").length,
+      count: publications.filter((p) => p.publicationType === "conference")
+        .length,
     },
     {
       key: "lightly-reviewed",
       label: "Lightly Reviewed",
-      count: publications.filter((p) => p.type === "lightly-reviewed").length,
+      count: publications.filter(
+        (p) => p.publicationType === "lightly-reviewed",
+      ).length,
     },
   ];
 
@@ -179,7 +138,7 @@ export default function PublicationsClient() {
           </div>
         ) : (
           filteredPublications.map((pub, index) => {
-            const typeConfig = getTypeConfig(pub.type);
+            const typeConfig = getTypeConfig(pub.publicationType);
             return (
               <div
                 key={`${pub.title}-${pub.year}`} // Better key for filtering animations

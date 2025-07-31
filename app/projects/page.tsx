@@ -1,10 +1,24 @@
-import projectsData from "@/data/projectsData";
 import Card from "@/components/Card";
 import { genPageMetadata } from "app/seo";
+import { allProjects } from "contentlayer/generated";
 
 export const metadata = genPageMetadata({ title: "Projects" });
 
 export default function Projects() {
+  // Filter out drafts and sort projects by date (newest first), then by featured status
+  const sortedProjects = allProjects
+    .filter((p) => p.draft !== true)
+    .sort((a, b) => {
+      // Sort by featured first, then by date
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+
+      // If both are featured or both are not featured, sort by date
+      const dateA = a.date ? new Date(a.date).getTime() : 0;
+      const dateB = b.date ? new Date(b.date).getTime() : 0;
+      return dateB - dateA; // Newest first
+    });
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -18,13 +32,13 @@ export default function Projects() {
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">
-            {projectsData.map((d) => (
+            {sortedProjects.map((project) => (
               <Card
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
+                key={project.title}
+                title={project.title}
+                description={project.description}
+                imgSrc={project.imgSrc}
+                href={project.href}
               />
             ))}
           </div>

@@ -147,9 +147,76 @@ export const Authors = defineDocumentType(() => ({
   computedFields,
 }));
 
+export const Publications = defineDocumentType(() => ({
+  name: "Publications",
+  filePathPattern: "publications/**/*.mdx",
+  contentType: "mdx", // MDX files for metadata
+  fields: {
+    title: { type: "string", required: true },
+    authors: { type: "string", required: true },
+    conference: { type: "string", required: true },
+    conferenceShort: { type: "string", required: true },
+    year: { type: "string", required: true },
+    date: { type: "date" }, // Optional date field for sorting, defaults to Jan 1 of the year
+    publicationType: { type: "string", required: true }, // conference, lightly-reviewed, etc.
+    links: { type: "json" }, // Array of {type: string, url: string}
+    draft: { type: "boolean" },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ""),
+    },
+    path: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath,
+    },
+    filePath: {
+      type: "string",
+      resolve: (doc) => doc._raw.sourceFilePath,
+    },
+    // Compute date from year if not provided
+    computedDate: {
+      type: "date",
+      resolve: (doc) => doc.date || `${doc.year}-01-01`,
+    },
+  },
+}));
+
+export const Projects = defineDocumentType(() => ({
+  name: "Projects",
+  filePathPattern: "projects/**/*.mdx",
+  contentType: "mdx", // MDX files for metadata
+  fields: {
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+    href: { type: "string" }, // Optional external link
+    imgSrc: { type: "string" }, // Optional image source
+    date: { type: "date" }, // Optional date for sorting
+    featured: { type: "boolean" }, // Optional featured flag
+    technologies: { type: "list", of: { type: "string" }, default: [] }, // Tech stack
+    category: { type: "string" }, // Project category
+    draft: { type: "boolean" },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ""),
+    },
+    path: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath,
+    },
+    filePath: {
+      type: "string",
+      resolve: (doc) => doc._raw.sourceFilePath,
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: "data",
-  documentTypes: [Blog, Authors],
+  documentTypes: [Blog, Authors, Publications, Projects],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

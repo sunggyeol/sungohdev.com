@@ -3,7 +3,7 @@ const siteMetadata = {
   title: "Sung Oh",
   author: "Sung Oh",
   headerTitle: "Sung Oh",
-  description: "Sung Oh is All You Need",
+  description: "Sung Oh's Personal Website",
   language: "en-us",
   theme: "dark", // system, dark or light
   siteUrl: "https://www.sunggyeol.com",
