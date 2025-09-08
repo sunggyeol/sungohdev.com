@@ -159,6 +159,7 @@ export const Publications = defineDocumentType(() => ({
     year: { type: "string", required: true },
     date: { type: "date" }, // Optional date field for sorting, defaults to Jan 1 of the year
     publicationType: { type: "string", required: true }, // conference, lightly-reviewed, etc.
+    sortOrder: { type: "number" }, // Optional field for custom sorting (lower numbers appear first)
     links: { type: "json" }, // Array of {type: string, url: string}
     draft: { type: "boolean" },
   },
