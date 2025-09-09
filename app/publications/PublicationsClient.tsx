@@ -74,11 +74,8 @@ export default function PublicationsClient({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-primary-500 border border-primary-500 rounded hover:bg-primary-500 hover:text-white dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-400 dark:hover:text-white transition-colors no-underline max-w-full"
-              style={{
-                minWidth: `${Math.min(width, 64)}px`,
-                width: "auto",
-              }}
+              className="inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-primary-500 border border-primary-500 rounded hover:bg-primary-500 hover:text-white dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-400 dark:hover:text-white transition-colors no-underline max-w-full md:max-w-none"
+              style={{ width: `${width}px` }}
             >
               {link.type}
             </a>
@@ -160,9 +157,9 @@ export default function PublicationsClient({
 
                 <div className="flex items-start gap-3">
                   {/* Left Column - Conference Badge and Links */}
-                  <div className="flex-shrink-0 w-16 sm:w-20 md:w-24 lg:w-28 ml-2">
+                  <div className="flex-shrink-0 w-16 sm:w-16 md:w-11 lg:w-14 ml-2">
                     <div
-                      className="bg-primary-500 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-flex items-center justify-center w-full max-w-full"
+                      className="bg-primary-500 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-flex items-center justify-center w-full max-w-full md:w-auto md:max-w-none"
                       style={{
                         width: `${getBadgeWidth(pub.conferenceShort)}px`,
                       }}
