@@ -74,8 +74,11 @@ export default function PublicationsClient({
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-primary-500 border border-primary-500 rounded hover:bg-primary-500 hover:text-white dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-400 dark:hover:text-white transition-colors no-underline"
-              style={{ width: `${width}px` }}
+              className="inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-primary-500 border border-primary-500 rounded hover:bg-primary-500 hover:text-white dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-400 dark:hover:text-white transition-colors no-underline max-w-full"
+              style={{
+                minWidth: `${Math.min(width, 64)}px`,
+                width: "auto",
+              }}
             >
               {link.type}
             </a>
@@ -116,20 +119,22 @@ export default function PublicationsClient({
             <button
               key={button.key}
               onClick={() => setFilter(button.key)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors border ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
                 filter === button.key
                   ? "bg-primary-500 text-white border-primary-500"
                   : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
               }`}
             >
               {button.label}
-              <span className="ml-2 text-xs opacity-75">({button.count})</span>
+              <span className="ml-1.5 text-xs opacity-75">
+                ({button.count})
+              </span>
             </button>
           ))}
         </div>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {filteredPublications.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 dark:text-gray-400">
@@ -142,22 +147,22 @@ export default function PublicationsClient({
             return (
               <div
                 key={`${pub.title}-${pub.year}`} // Better key for filtering animations
-                className="border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-all duration-200 p-4 animate-in fade-in slide-in-from-bottom-4"
+                className="border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-all duration-200 p-3 animate-in fade-in slide-in-from-bottom-4"
               >
                 {/* Paper Type Indicator */}
-                <div className="mb-3">
+                <div className="mb-2">
                   <span
-                    className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${typeConfig.bgColor} ${typeConfig.textColor} ${typeConfig.borderColor}`}
+                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${typeConfig.bgColor} ${typeConfig.textColor} ${typeConfig.borderColor}`}
                   >
                     {typeConfig.label}
                   </span>
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3">
                   {/* Left Column - Conference Badge and Links */}
-                  <div className="flex-shrink-0 w-12 sm:w-14 md:w-16 lg:w-20">
+                  <div className="flex-shrink-0 w-16 sm:w-20 md:w-24 lg:w-28 ml-2">
                     <div
-                      className="bg-primary-500 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-flex items-center justify-center"
+                      className="bg-primary-500 text-white px-2 py-1 rounded text-xs font-bold mb-2 inline-flex items-center justify-center w-full max-w-full"
                       style={{
                         width: `${getBadgeWidth(pub.conferenceShort)}px`,
                       }}
@@ -169,18 +174,15 @@ export default function PublicationsClient({
 
                   {/* Right Column - Publication Details */}
                   <div className="flex-1">
-                    <div className="space-y-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 leading-tight mt-0">
+                    <div className="space-y-0.5">
+                      <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 leading-tight mt-0">
                         {pub.title}
                       </h3>
-                      <p className="text-gray-700 dark:text-gray-300">
+                      <p className="text-sm text-gray-700 dark:text-gray-300">
                         {boldMyName(pub.authors)}
                       </p>
-                      <p className="text-gray-600 dark:text-gray-400 italic">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 italic">
                         {pub.conference}
-                      </p>
-                      <p className="text-gray-500 dark:text-gray-500 text-sm">
-                        {pub.year}
                       </p>
                     </div>
                   </div>
