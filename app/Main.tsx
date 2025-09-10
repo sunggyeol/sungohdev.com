@@ -1,93 +1,60 @@
-import Link from "@/components/Link";
-import Tag from "@/components/Tag";
+import { MDXLayoutRenderer } from "pliny/mdx-components";
+import { Authors, allAuthors, allPublications } from "contentlayer/generated";
+import { coreContent } from "pliny/utils/contentlayer";
 import siteMetadata from "@/data/siteMetadata";
-import { formatDate } from "pliny/utils/formatDate";
-import NewsletterForm from "pliny/ui/NewsletterForm";
+import PublicationsPreview from "@/components/PublicationsPreview";
 
-const MAX_DISPLAY = 5;
+export default function Home() {
+  // Get the author data (main intro content)
+  const author = allAuthors.find((p) => p.slug === "main-intro") as Authors;
+  const mainContent = coreContent(author);
 
-export default function Home({ posts }) {
+  // Get publications data
+  const sortedPublications = allPublications
+    .filter((p) => p.draft !== true)
+    .sort((a, b) => {
+      // If both have sortOrder, use that (higher numbers first)
+      if (a.sortOrder !== undefined && b.sortOrder !== undefined) {
+        return b.sortOrder - a.sortOrder;
+      }
+      // If only one has sortOrder, prioritize it
+      if (a.sortOrder !== undefined) return -1;
+      if (b.sortOrder !== undefined) return 1;
+      // If neither has sortOrder, fall back to year (newest first), then title
+      const yearA = parseInt(a.year);
+      const yearB = parseInt(b.year);
+      if (yearA !== yearB) {
+        return yearB - yearA; // Newest first
+      }
+      return a.title.localeCompare(b.title); // Alphabetical by title within same year
+    });
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-2xl font-extrabold leading-8 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-9 md:text-4xl md:leading-10">
-            Latest
+          <h1 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
+            Hi, I'm Sung Oh!
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
-          </p>
         </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-          {!posts.length && "No posts found."}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post;
-            return (
-              <li key={slug} className="py-12">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>
-                          {formatDate(date, siteMetadata.locale)}
-                        </time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                          {summary}
-                        </div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read more: "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            );
-          })}
-        </ul>
+
+        {/* About Section - Condensed */}
+        <div className="py-6">
+          <div className="prose max-w-none dark:prose-invert prose-base">
+            <MDXLayoutRenderer code={author.body.code} />
+          </div>
+        </div>
+
+        {/* Publications Section - Condensed */}
+        <div className="py-6">
+          <div className="space-y-2 pb-6 md:space-y-3">
+            <h2 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
+              Recent Publications
+            </h2>
+          </div>
+          <PublicationsPreview publications={sortedPublications} />
+        </div>
       </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
     </>
   );
 }

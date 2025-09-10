@@ -3,7 +3,7 @@ const siteMetadata = {
   title: "Sung Oh",
   author: "Sung Oh",
   headerTitle: "Sung Oh",
-  description: "Sung Oh's Personal Website",
+  description: "CS ∩ HCI ⊆ VT",
   language: "en-us",
   theme: "dark", // system, dark or light
   siteUrl: "https://www.sunggyeol.com",
@@ -19,7 +19,7 @@ const siteMetadata = {
   // youtube: 'https://youtube.com',
   linkedin: "https://www.linkedin.com/in/sungoh/",
   // threads: 'https://www.threads.net',
-  instagram: "https://www.instagram.com/sung.ohh/",
+  scholar: "https://scholar.google.com/citations?user=Yua2oBoAAAAJ&hl=en",
   locale: "en-US",
   analytics: {
     // If you want to use an analytics provider you have to add it to the
