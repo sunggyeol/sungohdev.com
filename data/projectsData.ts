@@ -7,6 +7,12 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: "Instant Prompt Optimizer",
+    description: `A powerful Chrome extension that instantly optimizes your highlighted text into better AI prompts using Google's Gemini AI. Transform your AI conversations with improved, more effective prompts across popular platforms like Claude.ai, ChatGPT, Google Gemini, and Perplexity.`,
+    imgSrc: "/static/images/PromptOptimizer.jpg",
+    href: "https://chromewebstore.google.com/detail/Instant%20Prompt%20Optimizer/dcmjlbfcigamnfhedbfcifkjgpgigioe",
+  },
+  {
     title: "DiaryQuest",
     description: `My team and I built DiaryQuest, a web-based platform that streamlines HCI-focused diary studies with intuitive submission tools, progress tracking, and sentiment analysis. To enhance feedback quality, we fine-tuned the Mistral 7B model to generate constructive, rubric-based feedback and thematic insights from student reflections. This integration enables scalable, AI-assisted evaluation and promotes deeper engagement in large classroom settings.`,
     imgSrc: "/static/images/DiaryQuest_Dashboard.png",
