@@ -11,12 +11,17 @@ cd "$PROJECT_ROOT" || exit 1
 
 echo "Cleaning caches in: $PROJECT_ROOT"
 
-# Remove local cache directories
-rm -rf .contentlayer .next node_modules/.cache
+# Remove local cache directories (force removal, ignore errors)
+rm -rf .contentlayer 2>/dev/null || true
+rm -rf .next 2>/dev/null || true
+rm -rf node_modules/.cache 2>/dev/null || true
 
 # Also clean pnpm store cache for contentlayer
 rm -rf node_modules/.pnpm/.contentlayer 2>/dev/null || true
 rm -rf node_modules/.pnpm/*contentlayer*/.contentlayer 2>/dev/null || true
+
+# Remove TypeScript build cache
+rm -rf tsconfig.tsbuildinfo 2>/dev/null || true
 
 # Remove any contentlayer caches created with buggy paths
 # This handles the /home/home bug in contentlayer2
