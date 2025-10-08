@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "start": "next dev",
-    "dev": "cross-env INIT_CWD=$PWD next dev",
+    "predev": "bash ./scripts/ensure-clean-start.sh",
+    "dev": "bash ./scripts/run-from-physical-path.sh next dev",
     "clean:contentlayer": "bash ./scripts/clean-cache.sh",
-    "prebuild": "pnpm run clean:contentlayer",
-    "build": "cd $(pwd -P) && cross-env INIT_CWD=$PWD NODE_NO_WARNINGS=1 next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
+    "prebuild": "bash ./scripts/ensure-clean-start.sh",
+    "build": "bash ./scripts/run-from-physical-path.sh cross-env NODE_NO_WARNINGS=1 next build && bash ./scripts/run-from-physical-path.sh cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "serve": "next start",
-    "analyze": "cross-env ANALYZE=true next build",
+    "analyze": "bash ./scripts/run-from-physical-path.sh cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
     "prepare": "husky"
   },
