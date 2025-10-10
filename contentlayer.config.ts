@@ -145,9 +145,34 @@ export const Projects = defineDocumentType(() => ({
   },
 }));
 
+export const News = defineDocumentType(() => ({
+  name: "News",
+  filePathPattern: "news/**/*.mdx",
+  contentType: "mdx",
+  fields: {
+    date: { type: "date", required: true }, // Date of the news
+    content: { type: "string", required: true }, // One sentence news content
+    draft: { type: "boolean" },
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ""),
+    },
+    path: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath,
+    },
+    filePath: {
+      type: "string",
+      resolve: (doc) => doc._raw.sourceFilePath,
+    },
+  },
+}));
+
 export default makeSource({
   contentDirPath: "data",
-  documentTypes: [Authors, Publications, Projects],
+  documentTypes: [Authors, Publications, Projects, News],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

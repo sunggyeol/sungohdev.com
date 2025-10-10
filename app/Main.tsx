@@ -1,8 +1,14 @@
 import { MDXLayoutRenderer } from "pliny/mdx-components";
-import { Authors, allAuthors, allPublications } from "contentlayer/generated";
+import {
+  Authors,
+  allAuthors,
+  allPublications,
+  allNews,
+} from "contentlayer/generated";
 import { coreContent } from "pliny/utils/contentlayer";
 import siteMetadata from "@/data/siteMetadata";
 import PublicationsPreview from "@/components/PublicationsPreview";
+import NewsPreview from "@/components/NewsPreview";
 
 export default function Home() {
   // Get the author data (main intro content)
@@ -29,6 +35,13 @@ export default function Home() {
       return a.title.localeCompare(b.title); // Alphabetical by title within same year
     });
 
+  // Get news data (sorted by date, newest first)
+  const sortedNews = allNews
+    .filter((n) => n.draft !== true)
+    .sort((a, b) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -44,6 +57,18 @@ export default function Home() {
             <MDXLayoutRenderer code={author.body.code} />
           </div>
         </div>
+
+        {/* News Section */}
+        {sortedNews.length > 0 && (
+          <div className="py-6">
+            <div className="space-y-2 pb-6 md:space-y-3">
+              <h2 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
+                News
+              </h2>
+            </div>
+            <NewsPreview news={sortedNews} />
+          </div>
+        )}
 
         {/* Publications Section - Condensed */}
         <div className="py-6">
