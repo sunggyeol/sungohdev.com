@@ -5,15 +5,11 @@ import { allProjects } from "contentlayer/generated";
 export const metadata = genPageMetadata({ title: "Projects" });
 
 export default function Projects() {
-  // Filter out drafts and sort projects by date (newest first), then by featured status
+  // Filter out drafts and sort projects by date (newest first)
   const sortedProjects = allProjects
     .filter((p) => p.draft !== true)
     .sort((a, b) => {
-      // Sort by featured first, then by date
-      if (a.featured && !b.featured) return -1;
-      if (!a.featured && b.featured) return 1;
-
-      // If both are featured or both are not featured, sort by date
+      // Sort by date (newest first)
       const dateA = a.date ? new Date(a.date).getTime() : 0;
       const dateB = b.date ? new Date(b.date).getTime() : 0;
       return dateB - dateA; // Newest first

@@ -124,7 +124,6 @@ export const Projects = defineDocumentType(() => ({
     href: { type: "string" }, // Optional external link
     imgSrc: { type: "string" }, // Optional image source
     date: { type: "date" }, // Optional date for sorting
-    featured: { type: "boolean" }, // Optional featured flag
     technologies: { type: "list", of: { type: "string" }, default: [] }, // Tech stack
     category: { type: "string" }, // Project category
     draft: { type: "boolean" },
