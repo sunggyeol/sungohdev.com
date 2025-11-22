@@ -29,7 +29,7 @@ export default function Page() {
   return (
     <PublicationLayout
       title="Publications"
-      description="Conference Proceedings, Lightly Reviewed Papers, Posters, and Extended Abstracts"
+      description="Conference Proceedings, Posters, and Extended Abstracts"
     >
       <PublicationsClient publications={sortedPublications} />
     </PublicationLayout>
