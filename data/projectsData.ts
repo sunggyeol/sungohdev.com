@@ -7,6 +7,12 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: "Commit Agent CLI",
+    description: `An AI-powered git commit message generator using Claude Sonnet 4.5 / Opus 4.5 or Google Gemini and LangGraph. This tool autonomously explores your codebase to generate intelligent, context-aware commit messages with full transparency into its reasoning process. Supports customizable commit styles with secure local configuration storage.`,
+    imgSrc: "/static/images/commit-cli.png",
+    href: "https://www.npmjs.com/package/commit-agent-cli",
+  },
+  {
     title: "Instant Prompt Optimizer",
     description: `A powerful Chrome extension that instantly optimizes your highlighted text into better AI prompts using Google's Gemini AI. Transform your AI conversations with improved, more effective prompts across popular platforms like Claude.ai, ChatGPT, Google Gemini, and Perplexity.`,
     imgSrc: "/static/images/PromptOptimizer.jpg",
