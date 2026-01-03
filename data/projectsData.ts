@@ -7,6 +7,12 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: "Can I Wear Shorts Now?",
+    description: `A weather-based web app that tells you whether it's suitable to wear shorts today. It fetches weather data using geolocation or IP-based location as a fallback, utilizing the OpenWeather API to determine current temperature and conditions. The app considers both temperature (68°F/20°C threshold) and weather conditions like rain or thunderstorms to give you a definitive answer.`,
+    imgSrc: "/static/images/caniwearshortsnow.png",
+    href: "https://caniwearshortsnow.com",
+  },
+  {
     title: "Commit Agent CLI",
     description: `An AI-powered git commit message generator using Claude Sonnet 4.5 / Opus 4.5 or Google Gemini and LangGraph. This tool autonomously explores your codebase to generate intelligent, context-aware commit messages with full transparency into its reasoning process. Supports customizable commit styles with secure local configuration storage.`,
     imgSrc: "/static/images/commit-cli.png",
