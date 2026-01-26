@@ -7,6 +7,11 @@ interface Project {
 
 const projectsData: Project[] = [
   {
+    title: "Token-Efficient Video Game Summarization for Multimodal LLMs",
+    description: `This project demonstrates that event-driven frame selection significantly improves token efficiency for LLM-based video summarization. Using Apex Legends gameplay with the Overwolf API, we achieved 78.1% accuracy with 73% fewer tokens compared to raw video processing. The event-based method captures screenshots only when specific gameplay events occur, enabling context-aware summarization with minimal visual input.`,
+    href: "/static/documents/apex-ai-video-summarization.pdf",
+  },
+  {
     title: "Can I Wear Shorts Now?",
     description: `A weather-based web app that tells you whether it's suitable to wear shorts today. It fetches weather data using geolocation or IP-based location as a fallback, utilizing the OpenWeather API to determine current temperature and conditions. The app considers both temperature (68°F/20°C threshold) and weather conditions like rain or thunderstorms to give you a definitive answer.`,
     imgSrc: "/static/images/caniwearshortsnow.png",
