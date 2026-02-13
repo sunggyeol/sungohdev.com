@@ -24,9 +24,7 @@ export default function PublicationLayout({
             </p>
           )}
         </div>
-        <div className="prose max-w-none pb-6 pt-6 dark:prose-invert prose-sm">
-          {children}
-        </div>
+        <div className="pb-6 pt-6">{children}</div>
       </div>
     </>
   );
