@@ -52,16 +52,17 @@ export default function PublicationsClient({
   const filters = [
     { key: "all", label: "All", count: publications.length },
     {
-      key: "conference",
-      label: "Conference",
-      count: publications.filter((p) => p.publicationType === "conference")
-        .length,
+      key: "conference-proceedings",
+      label: "Conference Proceedings",
+      count: publications.filter(
+        (p) => p.publicationType === "conference-proceedings",
+      ).length,
     },
     {
-      key: "lightly-reviewed",
-      label: "Lightly Reviewed",
+      key: "posters-and-extended-abstracts",
+      label: "Posters & Extended Abstracts",
       count: publications.filter(
-        (p) => p.publicationType === "lightly-reviewed",
+        (p) => p.publicationType === "posters-and-extended-abstracts",
       ).length,
     },
   ];
@@ -69,7 +70,7 @@ export default function PublicationsClient({
   return (
     <>
       {/* Filters */}
-      <div className="mb-8 flex items-center gap-1 text-sm">
+      <div className="mb-8 flex flex-wrap items-center gap-1 text-sm">
         {filters.map((f, i) => (
           <span key={f.key} className="flex items-center gap-1">
             {i > 0 && (
@@ -91,7 +92,7 @@ export default function PublicationsClient({
                     : "text-gray-300 dark:text-gray-600"
                 }
               >
-                {f.count}
+                ({f.count})
               </span>
             </button>
           </span>
