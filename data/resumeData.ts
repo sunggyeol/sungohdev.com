@@ -27,7 +27,7 @@ export const education: Education[] = [
   {
     school:
       "University of Michigan - Shanghai Jiao Tong University Joint Institute",
-    degree: "Engineering (Undecided)",
+    degree: "International Engineering Program",
     details: [],
     date: "Aug 2021",
   },
