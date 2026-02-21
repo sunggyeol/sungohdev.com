@@ -66,12 +66,10 @@ export default function PublicationsPreview({
               </p>
               <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
                 <span className="italic">{pub.conference}</span>
-                {"  ·  "}
-                <span>{pub.year}</span>
                 {pub.conferenceShort && (
                   <>
                     {"  ·  "}
-                    <span className="text-gray-400 dark:text-gray-500 text-xs font-medium">
+                    <span className="text-gray-400 dark:text-gray-500 text-xs font-bold">
                       [{pub.conferenceShort}]
                     </span>
                   </>

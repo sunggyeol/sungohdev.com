@@ -145,7 +145,7 @@ export default function PublicationsClient({
                         {pub.conferenceShort && (
                           <>
                             {"  ·  "}
-                            <span className="text-gray-400 dark:text-gray-500 text-xs font-medium">
+                            <span className="text-gray-400 dark:text-gray-500 text-xs font-bold">
                               [{pub.conferenceShort}]
                             </span>
                           </>
