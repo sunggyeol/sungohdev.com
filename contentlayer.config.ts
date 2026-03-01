@@ -122,10 +122,21 @@ export const Projects = defineDocumentType(() => ({
     title: { type: "string", required: true },
     description: { type: "string", required: true },
     href: { type: "string" }, // Optional external link
+    repoUrl: { type: "string" }, // Optional repository link (GitHub, etc.)
     imgSrc: { type: "string" }, // Optional image source
     date: { type: "date" }, // Optional date for sorting
     technologies: { type: "list", of: { type: "string" }, default: [] }, // Tech stack
     category: { type: "string" }, // Project category
+    projectType: {
+      type: "enum",
+      options: ["research", "personal"],
+      default: "personal",
+    },
+    relatedPublications: {
+      type: "list",
+      of: { type: "string" },
+      default: [],
+    },
     draft: { type: "boolean" },
   },
   computedFields: {

@@ -9,7 +9,7 @@ const projectsData: Project[] = [
   {
     title: "Token-Efficient Video Game Summarization for Multimodal LLMs",
     description: `This project demonstrates that event-driven frame selection significantly improves token efficiency for LLM-based video summarization. Using Apex Legends gameplay with the Overwolf API, we achieved 78.1% accuracy with 73% fewer tokens compared to raw video processing. The event-based method captures screenshots only when specific gameplay events occur, enabling context-aware summarization with minimal visual input.`,
-    href: "/static/documents/apex-ai-video-summarization.pdf",
+    href: "https://sungohdev.com/static/documents/apex-ai-video-summarization.pdf",
   },
   {
     title: "Can I Wear Shorts Now?",
@@ -21,7 +21,7 @@ const projectsData: Project[] = [
     title: "Commit Agent CLI",
     description: `An AI-powered git commit message generator using Claude Sonnet 4.5 / Opus 4.5 or Google Gemini and LangGraph. This tool autonomously explores your codebase to generate intelligent, context-aware commit messages with full transparency into its reasoning process. Supports customizable commit styles with secure local configuration storage.`,
     imgSrc: "/static/images/commit-cli.png",
-    href: "https://www.npmjs.com/package/commit-agent-cli",
+    href: "https://npmjs.com/package/commit-agent-cli",
   },
   {
     title: "Instant Prompt Optimizer",
@@ -58,7 +58,7 @@ const projectsData: Project[] = [
     title: "Fintellection",
     description: `I created the Fintellection, an AI-powered search engine that fetches and displays real-time financial data from the internet. Utilizing advanced techniques such as Retrieval-Augmented Generation (RAG), embeddings, and similarity searching, it delivers accurate and insightful financial information promptly.`,
     imgSrc: "/static/images/Fintellection.png",
-    href: "https://www.fintellection.com/",
+    href: "https://fintellection.com/",
   },
   {
     title: "Smart Workout Tracking Solution for Outdoor Fitness",
