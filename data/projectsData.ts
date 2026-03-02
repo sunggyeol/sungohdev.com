@@ -27,7 +27,7 @@ const projectsData: Project[] = [
     title: "Instant Prompt Optimizer",
     description: `A powerful Chrome extension that instantly optimizes your highlighted text into better AI prompts using Google's Gemini AI. Transform your AI conversations with improved, more effective prompts across popular platforms like Claude.ai, ChatGPT, Google Gemini, and Perplexity.`,
     imgSrc: "/static/images/PromptOptimizer.jpg",
-    href: "https://chromewebstore.google.com/detail/Instant%20Prompt%20Optimizer/dcmjlbfcigamnfhedbfcifkjgpgigioe",
+    href: "https://chromewebstore.google.com/detail/instant-prompt-optimizer/dcmjlbfcigamnfhedbfcifkjgpgigioe",
   },
   {
     title: "DiaryQuest",

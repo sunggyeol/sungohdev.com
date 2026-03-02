@@ -125,7 +125,7 @@ export const Projects = defineDocumentType(() => ({
     repoUrl: { type: "string" }, // Optional repository link (GitHub, etc.)
     imgSrc: { type: "string" }, // Optional image source
     date: { type: "date" }, // Optional date for sorting
-    technologies: { type: "list", of: { type: "string" }, default: [] }, // Tech stack
+    tags: { type: "list", of: { type: "string" }, default: [] },
     category: { type: "string" }, // Project category
     projectType: {
       type: "enum",

@@ -14,12 +14,9 @@ export default function ProjectsClient({
   projects,
   publications,
 }: ProjectsClientProps) {
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("research");
 
-  const filteredProjects = projects.filter((p) => {
-    if (filter === "all") return true;
-    return p.projectType === filter;
-  });
+  const filteredProjects = projects.filter((p) => p.projectType === filter);
 
   const getDoiUrl = (
     links: Array<{ type: string; url: string }> | undefined,
@@ -30,7 +27,6 @@ export default function ProjectsClient({
   };
 
   const filters = [
-    { key: "all", label: "All", count: projects.length },
     {
       key: "research",
       label: "Research",
@@ -232,20 +228,9 @@ export default function ProjectsClient({
                   </div>
                 )}
 
-                {(project.category ||
-                  (project.technologies &&
-                    project.technologies.length > 0)) && (
+                {project.tags && project.tags.length > 0 && (
                   <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
-                    {project.category && (
-                      <span className="font-medium">{project.category}</span>
-                    )}
-                    {project.category &&
-                      project.technologies &&
-                      project.technologies.length > 0 && <span>{" · "}</span>}
-                    {project.technologies &&
-                      project.technologies.length > 0 && (
-                        <span>{project.technologies.join(", ")}</span>
-                      )}
+                    {project.tags.join(", ")}
                   </p>
                 )}
               </div>
