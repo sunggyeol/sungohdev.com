@@ -70,32 +70,28 @@ export default function PublicationsClient({
   return (
     <>
       {/* Filters */}
-      <div className="mb-8 flex flex-wrap items-center gap-1 text-sm">
-        {filters.map((f, i) => (
-          <span key={f.key} className="flex items-center gap-1">
-            {i > 0 && (
-              <span className="text-gray-300 dark:text-gray-600 mx-1">/</span>
-            )}
-            <button
-              onClick={() => setFilter(f.key)}
-              className={
+      <div className="mb-8 flex flex-wrap items-center gap-2 text-sm">
+        {filters.map((f) => (
+          <button
+            key={f.key}
+            onClick={() => setFilter(f.key)}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
+              filter === f.key
+                ? "bg-primary-500 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+            }`}
+          >
+            {f.label}
+            <span
+              className={`text-xs ${
                 filter === f.key
-                  ? "font-medium text-gray-900 dark:text-gray-100"
-                  : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400"
-              }
+                  ? "text-white/70"
+                  : "text-gray-400 dark:text-gray-500"
+              }`}
             >
-              {f.label}{" "}
-              <span
-                className={
-                  filter === f.key
-                    ? "text-gray-500 dark:text-gray-400"
-                    : "text-gray-300 dark:text-gray-600"
-                }
-              >
-                ({f.count})
-              </span>
-            </button>
-          </span>
+              {f.count}
+            </span>
+          </button>
         ))}
       </div>
 

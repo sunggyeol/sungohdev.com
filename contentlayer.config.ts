@@ -123,6 +123,7 @@ export const Projects = defineDocumentType(() => ({
     description: { type: "string", required: true },
     href: { type: "string" }, // Optional external link
     repoUrl: { type: "string" }, // Optional repository link (GitHub, etc.)
+    paperUrl: { type: "string" }, // Optional paper/PDF link
     imgSrc: { type: "string" }, // Optional image source
     date: { type: "date" }, // Optional date for sorting
     tags: { type: "list", of: { type: "string" }, default: [] },

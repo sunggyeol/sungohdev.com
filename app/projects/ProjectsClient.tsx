@@ -42,32 +42,28 @@ export default function ProjectsClient({
   return (
     <>
       {/* Filters */}
-      <div className="mb-8 flex flex-wrap items-center gap-1 text-sm">
-        {filters.map((f, i) => (
-          <span key={f.key} className="flex items-center gap-1">
-            {i > 0 && (
-              <span className="text-gray-300 dark:text-gray-600 mx-1">/</span>
-            )}
-            <button
-              onClick={() => setFilter(f.key)}
-              className={
+      <div className="mb-8 flex flex-wrap items-center gap-2 text-sm">
+        {filters.map((f) => (
+          <button
+            key={f.key}
+            onClick={() => setFilter(f.key)}
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
+              filter === f.key
+                ? "bg-primary-500 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+            }`}
+          >
+            {f.label}
+            <span
+              className={`text-xs ${
                 filter === f.key
-                  ? "font-medium text-gray-900 dark:text-gray-100"
-                  : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400"
-              }
+                  ? "text-white/70"
+                  : "text-gray-400 dark:text-gray-500"
+              }`}
             >
-              {f.label}{" "}
-              <span
-                className={
-                  filter === f.key
-                    ? "text-gray-500 dark:text-gray-400"
-                    : "text-gray-300 dark:text-gray-600"
-                }
-              >
-                ({f.count})
-              </span>
-            </button>
-          </span>
+              {f.count}
+            </span>
+          </button>
         ))}
       </div>
 
@@ -119,7 +115,7 @@ export default function ProjectsClient({
                     <Image
                       alt={project.title}
                       src={project.imgSrc}
-                      className="object-cover"
+                      className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                       fill
                     />
                   )}
@@ -147,7 +143,10 @@ export default function ProjectsClient({
                   {project.description}
                 </p>
 
-                {(showHref || project.repoUrl || relatedPubs.length > 0) && (
+                {(showHref ||
+                  project.repoUrl ||
+                  relatedPubs.length > 0 ||
+                  project.paperUrl) && (
                   <div className="mt-2 space-y-1">
                     {showHref && (
                       <p className="flex items-start gap-1.5 text-xs text-gray-400 dark:text-gray-500">
@@ -167,6 +166,26 @@ export default function ProjectsClient({
                           className="break-all hover:text-primary-500 dark:hover:text-primary-400"
                         >
                           {project.href}
+                        </a>
+                      </p>
+                    )}
+                    {project.paperUrl && (
+                      <p className="flex items-start gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 16 16"
+                          fill="currentColor"
+                          className="mt-px h-3 w-3 shrink-0"
+                        >
+                          <path d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm2-.5a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5H4Zm1 2.75A.75.75 0 0 1 5.75 5.5h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 5 6.25Zm0 3a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5A.75.75 0 0 1 5 9.25Z" />
+                        </svg>
+                        <a
+                          href={project.paperUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-primary-500 dark:hover:text-primary-400"
+                        >
+                          {project.title}
                         </a>
                       </p>
                     )}
