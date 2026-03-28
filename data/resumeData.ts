@@ -38,7 +38,7 @@ export const experience: Experience[] = [
     company: "Kearney",
     role: "Research Analyst",
     description:
-      "Building multimodal AI labeling pipelines for a marketing intelligence system.",
+      "Building a marketing intelligence system for a global tech leader, designing multimodal AI pipelines to support social media campaign analytics and performance modeling.",
     start: "Jan 2026",
     end: "Present",
   },
