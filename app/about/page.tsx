@@ -9,7 +9,7 @@ import { education, experience } from "@/data/resumeData";
 export const metadata = genPageMetadata({ title: "About" });
 
 export default function Page() {
-  const author = allAuthors.find((p) => p.slug === "default") as Authors;
+  const author = allAuthors.find((p) => p.slug === "about") as Authors;
   const mainContent = coreContent(author);
   const {
     name,
