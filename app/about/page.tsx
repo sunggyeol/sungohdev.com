@@ -1,5 +1,4 @@
 import { Authors, allAuthors } from "contentlayer/generated";
-import { MDXLayoutRenderer } from "pliny/mdx-components";
 import { coreContent } from "pliny/utils/contentlayer";
 import { genPageMetadata } from "app/seo";
 import Image from "@/components/Image";
@@ -10,7 +9,6 @@ export const metadata = genPageMetadata({ title: "About" });
 
 export default function Page() {
   const author = allAuthors.find((p) => p.slug === "about") as Authors;
-  const mainContent = coreContent(author);
   const {
     name,
     avatar,
@@ -20,7 +18,7 @@ export default function Page() {
     linkedin,
     github,
     scholar,
-  } = mainContent;
+  } = coreContent(author);
 
   // Convert anti-spam email format [at] -> @
   const emailHref = email ? `mailto:${email.replace("[at]", "@")}` : undefined;
@@ -64,11 +62,6 @@ export default function Page() {
 
         {/* Content area */}
         <div className="xl:col-span-3">
-          {/* Bio from MDX */}
-          <div className="prose max-w-none dark:prose-invert prose-base pb-8">
-            <MDXLayoutRenderer code={author.body.code} />
-          </div>
-
           {/* Education */}
           <section className="pb-8">
             <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-5">

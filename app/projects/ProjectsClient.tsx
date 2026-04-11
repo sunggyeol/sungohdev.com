@@ -90,7 +90,10 @@ export default function ProjectsClient({
               .filter(Boolean),
           );
           const hrefDoi = project.href ? extractDoi(project.href) : null;
-          const showHref = project.href && !(hrefDoi && paperDois.has(hrefDoi));
+          const showHref =
+            project.href &&
+            !(hrefDoi && paperDois.has(hrefDoi)) &&
+            project.href !== project.paperUrl;
 
           return (
             <div

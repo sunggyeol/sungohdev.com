@@ -29,7 +29,7 @@ export const education: Education[] = [
       "University of Michigan - Shanghai Jiao Tong University Joint Institute",
     degree: "International Engineering Program",
     details: [],
-    date: "Aug 2021",
+    date: "Sep 2020 – Aug 2021",
   },
 ];
 
@@ -38,7 +38,7 @@ export const experience: Experience[] = [
     company: "Kearney",
     role: "Research Analyst",
     description:
-      "Building a marketing intelligence system for a global tech leader, designing multimodal AI pipelines to support social media campaign analytics and performance modeling.",
+      "Building a marketing intelligence system for a global tech leader, designing multimodal AI pipelines to support social media campaign analytics and performance modeling",
     start: "Jan 2026",
     end: "Present",
   },
@@ -47,7 +47,7 @@ export const experience: Experience[] = [
     organization: "Department of Computer Science",
     role: "Undergraduate Teaching Assistant",
     description:
-      "Graded and mentored student projects weekly for CS3724: Introduction to Human-Computer Interaction.",
+      "Mentored student project groups and facilitated in-class activity sessions for CS 3724: Introduction to HCI",
     start: "Jan 2025",
     end: "Dec 2025",
   },
@@ -56,7 +56,7 @@ export const experience: Experience[] = [
     organization: "Notification Systems Lab (Tech on the Trail Lab)",
     role: "Undergraduate Research Assistant",
     description:
-      "Distilled and integrated LLMs into a learning platform for feedback generation and semantic visualization.",
+      "Distilled and integrated LLMs into a learning platform for feedback generation and semantic visualization",
     start: "Aug 2024",
     end: "May 2025",
   },
@@ -65,7 +65,7 @@ export const experience: Experience[] = [
     organization: "IDEEAS Lab",
     role: "Undergraduate Research Assistant",
     description:
-      "Researched generative AI in CS education using LLM and NLP techniques, including embedding and clustering methods to identify key themes.",
+      "Researched generative AI in CS education using LLM and NLP techniques, including embedding and clustering methods to identify key themes",
     start: "Dec 2023",
     end: "Dec 2025",
   },
@@ -73,7 +73,7 @@ export const experience: Experience[] = [
     company: "Abear",
     role: "Research Assistant",
     description:
-      "Built PoC agentic image processing AI pipelines for content generation on B2B e-commerce platforms.",
+      "Built PoC agentic image processing AI pipelines for content generation on B2B e-commerce platforms",
     start: "May 2025",
     end: "Aug 2025",
   },
@@ -82,14 +82,14 @@ export const experience: Experience[] = [
     organization: "Cloud Development Team",
     role: "Software Engineer Intern",
     description:
-      "Built a speech-to-speech pipeline on AWS EC2 with real-time transcription and LLM integration.",
+      "Built a speech-to-speech pipeline on AWS EC2 with real-time transcription and LLM integration",
     start: "Jun 2024",
     end: "Aug 2024",
   },
   {
     company: "Republic of Korea Army",
     role: "Sergeant",
-    description: "",
+    description: "Operated thermal observation devices for surveillance",
     start: "Sep 2021",
     end: "Mar 2023",
   },
