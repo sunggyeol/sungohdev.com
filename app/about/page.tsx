@@ -4,6 +4,7 @@ import { genPageMetadata } from "app/seo";
 import Image from "@/components/Image";
 import SocialIcon from "@/components/social-icons";
 import { education, experience } from "@/data/resumeData";
+import AiChat from "@/components/AiChat";
 
 export const metadata = genPageMetadata({ title: "About" });
 
@@ -20,113 +21,155 @@ export default function Page() {
     scholar,
   } = coreContent(author);
 
-  // Convert anti-spam email format [at] -> @
   const emailHref = email ? `mailto:${email.replace("[at]", "@")}` : undefined;
 
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700">
-      <div className="space-y-2 pb-6 pt-6 md:space-y-3">
-        <h1 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
-          About
-        </h1>
-      </div>
-
-      <div className="items-start space-y-4 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:space-y-0 py-6">
-        {/* Sidebar */}
-        <div className="flex flex-col items-center space-x-2">
-          {avatar && (
-            <Image
-              src={avatar}
-              alt="avatar"
-              width={128}
-              height={128}
-              className="h-32 w-32 rounded-full"
-            />
-          )}
-          <h3 className="pb-1 pt-3 text-xl font-bold leading-7 tracking-tight">
+    <div className="py-8">
+      {/* ── Profile header ── */}
+      <div className="flex items-start gap-6">
+        {avatar && (
+          <Image
+            src={avatar}
+            alt="avatar"
+            width={96}
+            height={96}
+            className="h-24 w-24 shrink-0 rounded-full ring-2 ring-gray-200 dark:ring-gray-700"
+          />
+        )}
+        <div className="min-w-0">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
             {name}
-          </h3>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            {occupation}
-          </div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            {company}
-          </div>
-          <div className="flex space-x-2 pt-4">
-            <SocialIcon kind="mail" href={emailHref} size={6} />
-            <SocialIcon kind="github" href={github} size={6} />
-            <SocialIcon kind="linkedin" href={linkedin} size={6} />
-            <SocialIcon kind="scholar" href={scholar} size={6} />
+          </h1>
+          <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
+            {occupation} · {company}
+          </p>
+          <div className="mt-3 flex items-center gap-3">
+            <SocialIcon kind="mail" href={emailHref} size={5} />
+            <SocialIcon kind="github" href={github} size={5} />
+            <SocialIcon kind="linkedin" href={linkedin} size={5} />
+            <SocialIcon kind="scholar" href={scholar} size={5} />
           </div>
         </div>
+      </div>
 
-        {/* Content area */}
-        <div className="xl:col-span-3">
-          {/* Education */}
-          <section className="pb-8">
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-5">
+      {/* ── Timeline sections ── */}
+      <div className="mt-12 space-y-12">
+        {/* Education */}
+        <section>
+          <div className="mb-6 flex items-center gap-3">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
               Education
             </h2>
-            <div className="space-y-5">
+            <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+          </div>
+
+          <div className="relative ml-3">
+            {/* Vertical axis line */}
+            <div className="absolute left-0 top-1 bottom-1 w-px bg-gray-200 dark:bg-gray-800" />
+
+            <div className="space-y-6">
               {education.map((edu) => (
-                <div key={`${edu.school}-${edu.degree}`}>
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-medium text-gray-900 dark:text-gray-100">
-                      {edu.school}
-                    </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 ml-4 shrink-0">
+                <div
+                  key={`${edu.school}-${edu.degree}`}
+                  className="relative pl-6"
+                >
+                  {/* Node marker */}
+                  <div className="absolute left-0 top-[7px] -translate-x-1/2">
+                    <div className="h-2 w-2 rounded-full bg-gray-400 ring-2 ring-white dark:bg-gray-500 dark:ring-gray-950" />
+                  </div>
+
+                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+                    <div className="min-w-0">
+                      <span className="font-medium text-gray-900 dark:text-gray-100">
+                        {edu.school}
+                      </span>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">
+                        {edu.degree}
+                      </div>
+                      {edu.details.map((detail) => (
+                        <div
+                          key={detail}
+                          className="text-sm text-gray-500 dark:text-gray-400"
+                        >
+                          {detail}
+                        </div>
+                      ))}
+                    </div>
+                    <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500 sm:ml-4">
                       {edu.date}
                     </span>
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300 mt-0.5">
-                    {edu.degree}
-                  </div>
-                  {edu.details.map((detail) => (
-                    <div
-                      key={detail}
-                      className="text-sm text-gray-600 dark:text-gray-300"
-                    >
-                      {detail}
-                    </div>
-                  ))}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* Experience */}
-          <section>
-            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-5">
+        {/* Experience */}
+        <section>
+          <div className="mb-6 flex items-center gap-3">
+            <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
               Experience
             </h2>
-            <div className="space-y-5">
+            <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+          </div>
+
+          <div className="relative ml-3">
+            {/* Vertical axis line */}
+            <div className="absolute left-0 top-1 bottom-1 w-px bg-gray-200 dark:bg-gray-800" />
+
+            <div className="space-y-6">
               {experience.map((exp) => (
-                <div key={`${exp.company}-${exp.role}`}>
-                  <div className="flex justify-between items-baseline">
-                    <span className="font-medium text-gray-900 dark:text-gray-100">
-                      {exp.company}
-                    </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 ml-4 shrink-0">
+                <div
+                  key={`${exp.company}-${exp.role}`}
+                  className="relative pl-6"
+                >
+                  {/* Node marker — filled for current, outlined for past */}
+                  <div className="absolute left-0 top-[7px] -translate-x-1/2">
+                    {exp.end === "Present" ? (
+                      <div className="h-2.5 w-2.5 rounded-full bg-gray-900 ring-2 ring-white dark:bg-gray-100 dark:ring-gray-950" />
+                    ) : (
+                      <div className="h-2 w-2 rounded-full bg-gray-400 ring-2 ring-white dark:bg-gray-500 dark:ring-gray-950" />
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+                    <div className="min-w-0">
+                      <span className="font-medium text-gray-900 dark:text-gray-100">
+                        {exp.company}
+                      </span>
+                      {exp.organization && (
+                        <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-500">
+                          / {exp.organization}
+                        </span>
+                      )}
+                      <div className="text-sm text-gray-600 dark:text-gray-300">
+                        {exp.role}
+                      </div>
+                      {exp.description && (
+                        <p className="mt-0.5 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                          {exp.description}
+                        </p>
+                      )}
+                    </div>
+                    <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500 sm:ml-4">
                       {exp.start} – {exp.end}
                     </span>
                   </div>
-                  {exp.organization && (
-                    <div className="text-sm font-medium italic text-gray-500 dark:text-gray-400 mt-0.5">
-                      {exp.organization}
-                    </div>
-                  )}
-                  <div className="text-sm text-gray-600 dark:text-gray-300 mt-0.5">
-                    {exp.role}
-                  </div>
-                  {exp.description && (
-                    <div className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-                      {exp.description}
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
-          </section>
+          </div>
+        </section>
+      </div>
+
+      {/* ── AI Chat ── */}
+      <div className="mt-12">
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+        </div>
+        <div className="mt-6">
+          <AiChat />
         </div>
       </div>
     </div>
