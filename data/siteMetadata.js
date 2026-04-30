@@ -3,7 +3,8 @@ const siteMetadata = {
   title: "Sung Oh",
   author: "Sung Oh",
   headerTitle: "Sung Oh",
-  description: "CS ∩ HCI ⊆ VT",
+  description:
+    "Incoming Ph.D. Student at Emory University | Research Analyst at Kearney",
   language: "en-us",
   theme: "dark", // system, dark or light
   siteUrl: "https://www.sunggyeol.com",
@@ -11,7 +12,9 @@ const siteMetadata = {
   siteLogo: "/static/images/logo.png",
   socialBanner: "/static/images/twitter-card.png",
   // mastodon: 'https://mastodon.social/@mastodonuser',
-  email: "sunggyeol@vt.edu",
+  // ROT13-encoded; decoded client-side in MailIcon on user interaction.
+  emailUser: "fhattlrby.bu",
+  emailDomain: "rzbel.rqh",
   github: "https://github.com/sunggyeol",
   // x: 'https://twitter.com/x',
   // twitter: 'https://twitter.com/Twitter',

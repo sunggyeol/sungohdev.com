@@ -3,6 +3,7 @@ import { coreContent } from "pliny/utils/contentlayer";
 import { genPageMetadata } from "app/seo";
 import Image from "@/components/Image";
 import SocialIcon from "@/components/social-icons";
+import MailIcon from "@/components/MailIcon";
 import { education, experience } from "@/data/resumeData";
 import AiChat from "@/components/AiChat";
 
@@ -21,7 +22,7 @@ export default function Page() {
     scholar,
   } = coreContent(author);
 
-  const emailHref = email ? `mailto:${email.replace("[at]", "@")}` : undefined;
+  const [emailUser, emailDomain] = email ? email.split("[at]") : [];
 
   return (
     <div className="py-8">
@@ -44,7 +45,9 @@ export default function Page() {
             {occupation} · {company}
           </p>
           <div className="mt-3 flex items-center gap-3">
-            <SocialIcon kind="mail" href={emailHref} size={5} />
+            {emailUser && emailDomain && (
+              <MailIcon user={emailUser} domain={emailDomain} size={5} />
+            )}
             <SocialIcon kind="github" href={github} size={5} />
             <SocialIcon kind="linkedin" href={linkedin} size={5} />
             <SocialIcon kind="scholar" href={scholar} size={5} />
@@ -94,6 +97,11 @@ export default function Page() {
                           {detail}
                         </div>
                       ))}
+                      {edu.note && (
+                        <div className="mt-1 text-xs italic text-gray-400 dark:text-gray-500">
+                          {edu.note}
+                        </div>
+                      )}
                     </div>
                     <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500 sm:ml-4">
                       {edu.date}

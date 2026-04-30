@@ -3,6 +3,7 @@ export type Education = {
   degree: string;
   details: string[]; // minor, GPA, honors as separate lines
   date: string;
+  note?: string;
 };
 
 export type Experience = {
@@ -23,13 +24,7 @@ export const education: Education[] = [
       "3.9/4.0 · Summa Cum Laude",
     ],
     date: "Dec 2025",
-  },
-  {
-    school:
-      "University of Michigan - Shanghai Jiao Tong University Joint Institute",
-    degree: "International Engineering Program",
-    details: [],
-    date: "Sep 2020 – Aug 2021",
+    note: "Transferred from University of Michigan – Shanghai Jiao Tong University Joint Institute (2020 – 2021)",
   },
 ];
 
