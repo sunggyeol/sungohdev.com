@@ -48,7 +48,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Virginia Tech",
-    organization: "Notification Systems Lab (Tech on the Trail Lab)",
+    organization: "Notification Systems Lab",
     role: "Undergraduate Research Assistant",
     description:
       "Distilled and integrated LLMs into a learning platform for feedback generation and semantic visualization",

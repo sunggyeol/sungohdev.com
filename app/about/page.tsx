@@ -81,31 +81,31 @@ export default function Page() {
                     <div className="h-2 w-2 rounded-full bg-gray-400 ring-2 ring-white dark:bg-gray-500 dark:ring-gray-950" />
                   </div>
 
-                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div className="min-w-0">
-                      <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <div>
+                    <div className="flex flex-row items-baseline justify-between gap-3">
+                      <span className="min-w-0 font-medium text-gray-900 dark:text-gray-100">
                         {edu.school}
                       </span>
-                      <div className="text-sm text-gray-600 dark:text-gray-300">
-                        {edu.degree}
-                      </div>
-                      {edu.details.map((detail) => (
-                        <div
-                          key={detail}
-                          className="text-sm text-gray-500 dark:text-gray-400"
-                        >
-                          {detail}
-                        </div>
-                      ))}
-                      {edu.note && (
-                        <div className="mt-1 text-xs italic text-gray-400 dark:text-gray-500">
-                          {edu.note}
-                        </div>
-                      )}
+                      <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500">
+                        {edu.date}
+                      </span>
                     </div>
-                    <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500 sm:ml-4">
-                      {edu.date}
-                    </span>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      {edu.degree}
+                    </div>
+                    {edu.details.map((detail) => (
+                      <div
+                        key={detail}
+                        className="text-sm text-gray-500 dark:text-gray-400"
+                      >
+                        {detail}
+                      </div>
+                    ))}
+                    {edu.note && (
+                      <div className="mt-1 text-xs italic text-gray-400 dark:text-gray-500">
+                        {edu.note}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -141,28 +141,28 @@ export default function Page() {
                     )}
                   </div>
 
-                  <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div className="min-w-0">
-                      <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <div>
+                    <div className="flex flex-row items-baseline justify-between gap-3">
+                      <span className="min-w-0 font-medium text-gray-900 dark:text-gray-100">
                         {exp.company}
                       </span>
-                      {exp.organization && (
-                        <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-500">
-                          / {exp.organization}
-                        </span>
-                      )}
-                      <div className="text-sm text-gray-600 dark:text-gray-300">
-                        {exp.role}
-                      </div>
-                      {exp.description && (
-                        <p className="mt-0.5 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-                          {exp.description}
-                        </p>
-                      )}
+                      <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500">
+                        {exp.start} – {exp.end}
+                      </span>
                     </div>
-                    <span className="shrink-0 font-mono text-xs tabular-nums text-gray-400 dark:text-gray-500 sm:ml-4">
-                      {exp.start} – {exp.end}
-                    </span>
+                    {exp.organization && (
+                      <div className="text-sm text-gray-400 dark:text-gray-500">
+                        {exp.organization}
+                      </div>
+                    )}
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      {exp.role}
+                    </div>
+                    {exp.description && (
+                      <p className="mt-0.5 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                        {exp.description}
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}
