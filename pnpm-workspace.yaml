@@ -1,3 +1,17 @@
+# Not a monorepo. This file exists only to allow postinstall scripts, but pnpm
+# treats its presence as declaring a workspace, so `packages` must be set or
+# pnpm 9 fails with "packages field missing or empty" (Vercel builds use 9.x).
+packages:
+  - .
+
+# pnpm 10 name for the build-script allowlist.
+onlyBuiltDependencies:
+  - contentlayer2
+  - esbuild
+  - protobufjs
+  - unrs-resolver
+
+# pnpm 11 name for the same thing.
 allowBuilds:
   # contentlayer2 postinstall wires up .contentlayer type generation
   contentlayer2: true
