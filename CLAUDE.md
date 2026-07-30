@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Personal website for Sung Oh built with Next.js 14, TypeScript, Tailwind CSS, and Contentlayer2. The site features publications, projects, and author information with MDX support.
 
-**Node.js Requirement:** This project requires Node.js 18.x due to contentlayer2's use of JSON import assertions.
+**Node.js Requirement:** Node.js 24 or newer (see `engines.node` and `.nvmrc`). Vercel deployments created on or after 2026-10-01 fail to build on Node 20.x, so the deploy target is pinned to 24.x.
 
 ## Development Commands
 

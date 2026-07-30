@@ -1,6 +1,9 @@
 {
   "name": "tailwind-nextjs-starter-blog",
   "version": "2.2.0",
+  "engines": {
+    "node": ">=24"
+  },
   "private": true,
   "scripts": {
     "start": "next dev",
