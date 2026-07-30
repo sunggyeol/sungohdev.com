@@ -27,10 +27,7 @@ export default function Page() {
     });
 
   return (
-    <PublicationLayout
-      title="Publications"
-      description="Conference Proceedings, Posters, and Extended Abstracts"
-    >
+    <PublicationLayout title="Publications">
       <PublicationsClient publications={sortedPublications} />
     </PublicationLayout>
   );

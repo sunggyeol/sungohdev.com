@@ -13,15 +13,13 @@ export default function PublicationLayout({
 }: PublicationLayoutProps) {
   return (
     <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="divide-y divide-gray-200">
         <div className="space-y-2 pb-6 pt-6 md:space-y-3">
-          <h1 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
+          <h1 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 sm:text-2xl sm:leading-8">
             {title}
           </h1>
           {description && (
-            <p className="text-base leading-6 text-gray-500 dark:text-gray-400">
-              {description}
-            </p>
+            <p className="text-base leading-6 text-gray-500">{description}</p>
           )}
         </div>
         <div className="pb-6 pt-6">{children}</div>

@@ -54,7 +54,7 @@ export default function MailIcon({ user, domain, size = 8 }: MailIconProps) {
     >
       <span className="sr-only">mail</span>
       <Mail
-        className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+        className={`fill-current text-gray-700 hover:text-primary-500 h-${size} w-${size}`}
       />
     </a>
   );

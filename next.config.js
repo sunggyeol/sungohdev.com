@@ -88,6 +88,17 @@ module.exports = () => {
         },
       ];
     },
+    // The About page was merged into the landing page. Server-side only —
+    // this is a no-op under `EXPORT=1` static export.
+    async redirects() {
+      return [
+        {
+          source: "/about",
+          destination: "/",
+          permanent: true,
+        },
+      ];
+    },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,

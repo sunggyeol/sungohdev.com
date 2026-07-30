@@ -1,46 +1,60 @@
+import Link from "@/components/Link";
 import { News } from "contentlayer/generated";
 
 interface NewsPreviewProps {
   news: News[];
-  maxVisible?: number;
+  // Omit to render the full list (used by the /news page).
+  maxDisplay?: number;
+  // Sidebar variant: shrinks the type only once the column narrows at xl.
+  // Mobile keeps full-size text since the list runs full width there.
+  compact?: boolean;
+}
+
+export function formatNewsDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    timeZone: "UTC",
+  });
 }
 
 export default function NewsPreview({
   news,
-  maxVisible = 5,
+  maxDisplay,
+  compact = false,
 }: NewsPreviewProps) {
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      timeZone: "UTC",
-    });
-  };
-
-  const needsScroll = news.length > maxVisible;
+  const displayNews = maxDisplay ? news.slice(0, maxDisplay) : news;
+  const hasMore = maxDisplay !== undefined && news.length > maxDisplay;
 
   return (
-    <div
-      className={
-        needsScroll ? "max-h-[280px] overflow-y-auto custom-scrollbar" : ""
-      }
-    >
-      <div className="space-y-0">
-        {news.map((item, index) => (
-          <div
-            key={`${item.slug}-${index}`}
-            className="flex items-start gap-4 py-2.5"
-          >
-            <span className="flex-shrink-0 text-xs font-medium tabular-nums text-primary-500 dark:text-primary-400 whitespace-nowrap mt-0.5 w-20">
-              {formatDate(item.date)}
-            </span>
-            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+    <>
+      <div className="space-y-4">
+        {displayNews.map((item, index) => (
+          <div key={`${item.slug}-${index}`}>
+            <p
+              className={`text-sm leading-relaxed text-gray-700 ${compact ? "xl:text-xs" : ""}`}
+            >
               {item.content}
             </p>
+            <span
+              className={`mt-0.5 block text-xs font-medium tabular-nums text-gray-400 ${compact ? "xl:text-[11px]" : ""}`}
+            >
+              {formatNewsDate(item.date)}
+            </span>
           </div>
         ))}
       </div>
-    </div>
+
+      {hasMore && (
+        <div className="mt-5">
+          <Link
+            href="/news"
+            className={`text-sm font-medium text-primary-500 hover:text-primary-600 ${compact ? "xl:text-xs" : ""}`}
+          >
+            See more &rarr;
+          </Link>
+        </div>
+      )}
+    </>
   );
 }

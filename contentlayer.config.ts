@@ -72,6 +72,7 @@ export const Authors = defineDocumentType(() => ({
     linkedin: { type: "string" },
     github: { type: "string" },
     scholar: { type: "string" },
+    cv: { type: "string" },
     layout: { type: "string" },
   },
   computedFields,
@@ -84,11 +85,28 @@ export const Publications = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     authors: { type: "string", required: true },
-    conference: { type: "string", required: true },
-    conferenceShort: { type: "string", required: true },
+    // Conference shown in the left rail, as people say it: "CHI", "VIS", "FIE".
+    venue: { type: "string", required: true },
+    // What kind of contribution it is. See data/publicationTypes.ts.
+    contribution: {
+      type: "enum",
+      options: [
+        "journal",
+        "full",
+        "short",
+        "poster",
+        "src",
+        "lbw",
+        "demo",
+        "workshop",
+      ],
+      required: true,
+    },
+    // The venue of record — the proceedings or journal you would cite. For an
+    // IEEE VIS full paper this is TVCG rather than the VIS proceedings.
+    publishedIn: { type: "string" },
     year: { type: "string", required: true },
     date: { type: "date" }, // Optional date field for sorting, defaults to Jan 1 of the year
-    publicationType: { type: "string", required: true }, // conference-proceedings, posters-and-extended-abstracts, etc.
     sortOrder: { type: "number" }, // Optional field for custom sorting (lower numbers appear first)
     links: { type: "json" }, // Array of {type: string, url: string}
     draft: { type: "boolean" },

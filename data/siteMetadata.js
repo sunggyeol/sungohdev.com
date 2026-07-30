@@ -4,13 +4,13 @@ const siteMetadata = {
   author: "Sung Oh",
   headerTitle: "Sung Oh",
   description:
-    "Incoming Ph.D. Student at Emory University | Research Analyst at Kearney",
+    "Ph.D. Student at Emory University working on visualization, cognitive science, artificial intelligence, and human-computer interaction.",
   language: "en-us",
-  theme: "dark", // system, dark or light
-  siteUrl: "https://www.sunggyeol.com",
-  siteRepo: "https://github.com/sunggyeol/sunggyeol.com",
-  siteLogo: "/static/images/logo.png",
-  socialBanner: "/static/images/twitter-card.png",
+  theme: "light", // system, dark or light
+  siteUrl: "https://sungohdev.com",
+  siteRepo: "https://github.com/sunggyeol/sungohdev.com",
+  siteLogo: "/static/favicons/android-chrome-512x512.png",
+  socialBanner: "/static/images/og-card.png",
   // mastodon: 'https://mastodon.social/@mastodonuser',
   // ROT13-encoded; decoded client-side in MailIcon on user interaction.
   emailUser: "fhattlrby.bu",
@@ -23,6 +23,7 @@ const siteMetadata = {
   linkedin: "https://www.linkedin.com/in/sungoh/",
   // threads: 'https://www.threads.net',
   scholar: "https://scholar.google.com/citations?user=Yua2oBoAAAAJ&hl=en",
+  cv: "/static/documents/CV_Sunggyeol_Oh.pdf",
   locale: "en-US",
   analytics: {
     // If you want to use an analytics provider you have to add it to the

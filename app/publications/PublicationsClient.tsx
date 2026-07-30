@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Publications } from "contentlayer/generated";
+import PublicationEntry from "@/components/PublicationEntry";
+import { contributionFamilies, getContribution } from "@/data/publicationTypes";
 
 interface PublicationsClientProps {
   publications: Publications[];
@@ -12,30 +14,12 @@ export default function PublicationsClient({
 }: PublicationsClientProps) {
   const [filter, setFilter] = useState("all");
 
-  const boldMyName = (authorsString: string) => {
-    const parts = authorsString.split("Sunggyeol Oh");
-    if (parts.length === 1) return authorsString;
+  const familyOf = (pub: Publications) =>
+    getContribution(pub.contribution).family;
 
-    return parts.map((part, index) => (
-      <span key={index}>
-        {part}
-        {index < parts.length - 1 && <strong>Sunggyeol Oh</strong>}
-      </span>
-    ));
-  };
-
-  const getDoiUrl = (
-    links: Array<{ type: string; url: string }> | undefined,
-  ) => {
-    if (!links) return null;
-    const doi = links.find((l) => l.type === "DOI");
-    return doi?.url ?? null;
-  };
-
-  const filteredPublications = publications.filter((pub) => {
-    if (filter === "all") return true;
-    return pub.publicationType === filter;
-  });
+  const filteredPublications = publications.filter(
+    (pub) => filter === "all" || familyOf(pub) === filter,
+  );
 
   // Group by year, maintaining existing sort order within each year
   const groupedByYear: Record<string, Publications[]> = {};
@@ -49,110 +33,75 @@ export default function PublicationsClient({
     (a, b) => parseInt(b) - parseInt(a),
   );
 
+  // Only surface families that actually have entries, so the filter row grows
+  // with the list instead of showing dead chips.
   const filters = [
     { key: "all", label: "All", count: publications.length },
-    {
-      key: "conference-proceedings",
-      label: "Conference Proceedings",
-      count: publications.filter(
-        (p) => p.publicationType === "conference-proceedings",
-      ).length,
-    },
-    {
-      key: "posters-and-extended-abstracts",
-      label: "Posters & Extended Abstracts",
-      count: publications.filter(
-        (p) => p.publicationType === "posters-and-extended-abstracts",
-      ).length,
-    },
+    ...contributionFamilies
+      .map((family) => ({
+        key: family.key as string,
+        label: family.label,
+        count: publications.filter((p) => familyOf(p) === family.key).length,
+      }))
+      .filter((f) => f.count > 0),
   ];
 
   return (
     <>
-      {/* Filters */}
-      <div className="mb-8 flex flex-wrap items-center gap-2 text-sm">
-        {filters.map((f) => (
-          <button
-            key={f.key}
-            onClick={() => setFilter(f.key)}
-            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
-              filter === f.key
-                ? "bg-primary-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
-            }`}
-          >
-            {f.label}
-            <span
-              className={`text-xs ${
+      {/* Filters — hidden when everything falls into a single family */}
+      {filters.length > 2 && (
+        <div className="mb-7 flex flex-wrap items-center gap-2 text-sm">
+          {filters.map((f) => (
+            <button
+              key={f.key}
+              onClick={() => setFilter(f.key)}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
                 filter === f.key
-                  ? "text-white/70"
-                  : "text-gray-400 dark:text-gray-500"
+                  ? "bg-primary-500 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
-              {f.count}
-            </span>
-          </button>
-        ))}
-      </div>
+              {f.label}
+              <span
+                className={`text-xs ${
+                  filter === f.key ? "text-white/70" : "text-gray-400"
+                }`}
+              >
+                {f.count}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* Publication Entries */}
       {filteredPublications.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-gray-500 dark:text-gray-400">
+        <div className="py-12 text-center">
+          <p className="text-gray-500">
             No publications found for the selected filter.
           </p>
         </div>
       ) : (
         <div className="space-y-8">
           {sortedYears.map((year) => (
-            <div key={year}>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 pb-2 border-b border-gray-200 dark:border-gray-700 mb-4">
-                {year}
-              </h2>
-
-              <div className="space-y-6">
-                {groupedByYear[year].map((pub) => {
-                  const doiUrl = getDoiUrl(pub.links);
-                  return (
-                    <div
-                      key={`${pub.title}-${pub.year}`}
-                      className="pl-4 border-l-2 border-gray-200 dark:border-gray-700"
-                    >
-                      <h3 className="text-base font-semibold leading-snug">
-                        {doiUrl ? (
-                          <a
-                            href={doiUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gray-900 dark:text-gray-100 hover:text-primary-500 dark:hover:text-primary-400"
-                          >
-                            {pub.title}
-                          </a>
-                        ) : (
-                          <span className="text-gray-900 dark:text-gray-100">
-                            {pub.title}
-                          </span>
-                        )}
-                      </h3>
-                      <p className="text-sm text-gray-700 dark:text-gray-300 mt-0.5">
-                        {boldMyName(pub.authors)}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-0.5">
-                        <span className="italic">{pub.conference}</span>
-                        {pub.conferenceShort && (
-                          <>
-                            {"  ·  "}
-                            <span className="text-gray-400 dark:text-gray-500 text-xs font-bold">
-                              [{pub.conferenceShort}]
-                            </span>
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  );
-                })}
+            <section key={year}>
+              {/* The year sits in the same left column as the venue labels, so
+                  scanning down reads "2026 / CHI", "2025 / FIE", ... */}
+              <div className="mb-4 flex items-center gap-4 sm:gap-8">
+                <h2 className="shrink-0 font-mono text-lg font-bold tabular-nums text-gray-900 sm:w-20">
+                  {year}
+                </h2>
+                <div className="h-px flex-1 bg-gray-200" />
               </div>
-            </div>
+
+              <div className="space-y-5">
+                {groupedByYear[year].map((pub) => (
+                  <PublicationEntry
+                    key={`${pub.title}-${pub.year}`}
+                    pub={pub}
+                  />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       )}

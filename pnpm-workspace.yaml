@@ -1,0 +1,7 @@
+allowBuilds:
+  # contentlayer2 postinstall wires up .contentlayer type generation
+  contentlayer2: true
+  # esbuild and unrs-resolver link/download native binaries in postinstall
+  esbuild: true
+  unrs-resolver: true
+  protobufjs: true

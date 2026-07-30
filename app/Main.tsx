@@ -6,14 +6,28 @@ import {
   allNews,
 } from "contentlayer/generated";
 import { coreContent } from "pliny/utils/contentlayer";
-import siteMetadata from "@/data/siteMetadata";
+import Image from "@/components/Image";
+import SocialIcon from "@/components/social-icons";
+import MailIcon from "@/components/MailIcon";
 import PublicationsPreview from "@/components/PublicationsPreview";
 import NewsPreview from "@/components/NewsPreview";
 
 export default function Home() {
-  // Get the author data (main intro content)
-  const author = allAuthors.find((p) => p.slug === "main-intro") as Authors;
-  const mainContent = coreContent(author);
+  // Profile metadata and bio prose both live in data/authors/about.mdx
+  const author = allAuthors.find((p) => p.slug === "about") as Authors;
+  const {
+    name,
+    avatar,
+    occupation,
+    company,
+    email,
+    linkedin,
+    github,
+    scholar,
+    cv,
+  } = coreContent(author);
+
+  const [emailUser, emailDomain] = email ? email.split("[at]") : [];
 
   // Get publications data
   const sortedPublications = allPublications
@@ -43,37 +57,70 @@ export default function Home() {
     });
 
   return (
-    <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        {/* About Section - Condensed */}
-        <div className="py-6">
-          <div className="prose max-w-none dark:prose-invert prose-base">
+    <div className="divide-y divide-gray-200">
+      {/* ── Hero: profile · bio · news ── */}
+      {/* At xl the three columns get explicit widths so the profile column stops
+          hogging space it never fills and News gets room to breathe. */}
+      <div className="grid grid-cols-1 gap-8 py-8 md:grid-cols-12 md:gap-x-8 xl:grid-cols-[minmax(0,17rem)_minmax(0,1fr)_minmax(0,21rem)]">
+        {/* Profile */}
+        <div className="flex items-center gap-5 md:col-span-4 md:block xl:col-span-1">
+          {avatar && (
+            <Image
+              src={avatar}
+              alt="avatar"
+              width={512}
+              height={512}
+              className="h-28 w-28 shrink-0 rounded-lg object-cover md:mx-auto md:mb-4 md:h-56 md:w-56"
+            />
+          )}
+          <div className="min-w-0 md:text-center">
+            <h1 className="text-xl font-bold tracking-tight text-gray-900">
+              {name}
+            </h1>
+            <p className="mt-0.5 text-sm text-gray-500">
+              {occupation} at {company}
+            </p>
+            {/* Negative margin keeps the row optically flush while the padding
+                gives each icon a finger-sized tap target on touch screens. */}
+            <div className="-ml-2 mt-1.5 flex items-center gap-1 [&_a]:p-2 md:ml-0 md:mt-2 md:justify-center">
+              {emailUser && emailDomain && (
+                <MailIcon user={emailUser} domain={emailDomain} size={5} />
+              )}
+              <SocialIcon kind="github" href={github} size={5} />
+              <SocialIcon kind="linkedin" href={linkedin} size={5} />
+              <SocialIcon kind="scholar" href={scholar} size={5} />
+              <SocialIcon kind="cv" href={cv} size={5} />
+            </div>
+          </div>
+        </div>
+
+        {/* Bio */}
+        <div className="md:col-span-8 xl:col-span-1">
+          <div className="prose prose-sm max-w-none">
             <MDXLayoutRenderer code={author.body.code} />
           </div>
         </div>
 
-        {/* News Section */}
+        {/* News */}
         {sortedNews.length > 0 && (
-          <div className="py-6">
-            <div className="space-y-2 pb-6 md:space-y-3">
-              <h2 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
-                News
-              </h2>
-            </div>
-            <NewsPreview news={sortedNews} />
+          <div className="border-t border-gray-200 pt-8 md:col-span-12 xl:col-span-1 xl:border-t-0 xl:pl-8 xl:pt-0">
+            <h2 className="mb-4 text-xl font-extrabold leading-7 tracking-tight text-gray-900">
+              News
+            </h2>
+            <NewsPreview news={sortedNews} maxDisplay={4} compact />
           </div>
         )}
-
-        {/* Publications Section - Condensed */}
-        <div className="py-6">
-          <div className="space-y-2 pb-6 md:space-y-3">
-            <h2 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 dark:text-gray-100 sm:text-2xl sm:leading-8">
-              Recent Publications
-            </h2>
-          </div>
-          <PublicationsPreview publications={sortedPublications} />
-        </div>
       </div>
-    </>
+
+      {/* ── Publications ── */}
+      <div className="py-8">
+        <div className="space-y-2 pb-6 md:space-y-3">
+          <h2 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 sm:text-2xl sm:leading-8">
+            Recent Publications
+          </h2>
+        </div>
+        <PublicationsPreview publications={sortedPublications} />
+      </div>
+    </div>
   );
 }

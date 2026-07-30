@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "@/components/Image";
 import Link from "@/components/Link";
+import { getContribution } from "@/data/publicationTypes";
 import { Projects, Publications } from "contentlayer/generated";
 
 interface ProjectsClientProps {
@@ -50,15 +51,13 @@ export default function ProjectsClient({
             className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
               filter === f.key
                 ? "bg-primary-500 text-white"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
             {f.label}
             <span
               className={`text-xs ${
-                filter === f.key
-                  ? "text-white/70"
-                  : "text-gray-400 dark:text-gray-500"
+                filter === f.key ? "text-white/70" : "text-gray-400"
               }`}
             >
               {f.count}
@@ -68,14 +67,14 @@ export default function ProjectsClient({
       </div>
 
       {/* Project Cards */}
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 md:divide-y-0 md:space-y-1">
+      <div className="divide-y divide-gray-200 md:divide-y-0 md:space-y-1">
         {filteredProjects.map((project) => {
           const relatedPubs =
             project.relatedPublications
               ?.map((slug) => publications.find((pub) => pub.slug === slug))
               .filter(Boolean) ?? [];
 
-          // Extract DOI identifier (e.g. "10.1145/3706599.3719287") from any URL
+          // Extract DOI identifier (e.g."10.1145/3706599.3719287") from any URL
           const extractDoi = (url: string) => {
             const match = url.match(/(10\.\d{4,}\/[^\s]+)/);
             return match?.[1] ?? null;
@@ -101,7 +100,7 @@ export default function ProjectsClient({
               className="group flex flex-col gap-4 py-8 first:pt-0 md:flex-row md:gap-6"
             >
               {project.imgSrc && (
-                <div className="relative aspect-[16/10] w-full shrink-0 self-start overflow-hidden rounded-md shadow-[0_0_0_1px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)] md:w-1/2">
+                <div className="relative aspect-[16/10] w-full shrink-0 self-start overflow-hidden rounded-md shadow-[0_0_0_1px_rgba(0,0,0,0.06)] md:w-1/2">
                   {project.href ? (
                     <Link
                       href={project.href}
@@ -131,18 +130,16 @@ export default function ProjectsClient({
                     <Link
                       href={project.href}
                       aria-label={`Link to ${project.title}`}
-                      className="text-gray-900 dark:text-gray-100 hover:text-primary-500 dark:hover:text-primary-400"
+                      className="text-gray-900 hover:text-primary-500"
                     >
                       {project.title}
                     </Link>
                   ) : (
-                    <span className="text-gray-900 dark:text-gray-100">
-                      {project.title}
-                    </span>
+                    <span className="text-gray-900">{project.title}</span>
                   )}
                 </h2>
 
-                <p className="mt-1.5 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
                   {project.description}
                 </p>
 
@@ -152,7 +149,7 @@ export default function ProjectsClient({
                   project.paperUrl) && (
                   <div className="mt-2 space-y-1">
                     {showHref && (
-                      <p className="flex items-start gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                      <p className="flex items-start gap-1.5 text-xs text-gray-400">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 16 16"
@@ -166,14 +163,14 @@ export default function ProjectsClient({
                           href={project.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="break-all hover:text-primary-500 dark:hover:text-primary-400"
+                          className="break-all hover:text-primary-500"
                         >
                           {project.href}
                         </a>
                       </p>
                     )}
                     {project.paperUrl && (
-                      <p className="flex items-start gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                      <p className="flex items-start gap-1.5 text-xs text-gray-400">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 16 16"
@@ -186,14 +183,14 @@ export default function ProjectsClient({
                           href={project.paperUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:text-primary-500 dark:hover:text-primary-400"
+                          className="hover:text-primary-500"
                         >
                           {project.title}
                         </a>
                       </p>
                     )}
                     {project.repoUrl && (
-                      <p className="flex items-start gap-1.5 text-xs text-gray-400 dark:text-gray-500">
+                      <p className="flex items-start gap-1.5 text-xs text-gray-400">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 16 16"
@@ -206,7 +203,7 @@ export default function ProjectsClient({
                           href={project.repoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="break-all hover:text-primary-500 dark:hover:text-primary-400"
+                          className="break-all hover:text-primary-500"
                         >
                           {project.repoUrl}
                         </a>
@@ -214,15 +211,14 @@ export default function ProjectsClient({
                     )}
                     {relatedPubs.map((pub) => {
                       const doiUrl = getDoiUrl(pub!.links);
-                      const trackLabel =
-                        pub!.publicationType === "conference-proceedings"
-                          ? "Full Paper"
-                          : "Extended Abstracts";
-                      const pubLabel = `${pub!.title} (${pub!.conferenceShort} ${pub!.year} ${trackLabel})`;
+                      const trackLabel = getContribution(
+                        pub!.contribution,
+                      ).label;
+                      const pubLabel = `${pub!.title} (${pub!.venue} ${pub!.year} ${trackLabel})`;
                       return (
                         <p
                           key={pub!.slug}
-                          className="flex items-start gap-1.5 text-xs text-gray-400 dark:text-gray-500"
+                          className="flex items-start gap-1.5 text-xs text-gray-400"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +233,7 @@ export default function ProjectsClient({
                               href={doiUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="hover:text-primary-500 dark:hover:text-primary-400"
+                              className="hover:text-primary-500"
                             >
                               {pubLabel}
                             </a>
@@ -251,7 +247,7 @@ export default function ProjectsClient({
                 )}
 
                 {project.tags && project.tags.length > 0 && (
-                  <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
+                  <p className="mt-2 text-xs text-gray-400">
                     {project.tags.join(", ")}
                   </p>
                 )}
