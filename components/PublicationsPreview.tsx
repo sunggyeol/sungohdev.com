@@ -18,7 +18,7 @@ export default function PublicationsPreview({
 
   return (
     <>
-      <div className="space-y-5">
+      <div className="space-y-4">
         {displayPublications.map((pub) => (
           <PublicationEntry key={`${pub.title}-${pub.year}`} pub={pub} />
         ))}

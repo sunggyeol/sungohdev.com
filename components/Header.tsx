@@ -5,7 +5,7 @@ import MobileNav from "./MobileNav";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between py-6 sm:py-10">
+    <header className="flex items-center justify-between py-6 sm:py-6">
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           {typeof siteMetadata.headerTitle === "string" ? (

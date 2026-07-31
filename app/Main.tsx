@@ -59,11 +59,11 @@ export default function Home() {
   return (
     <div className="divide-y divide-gray-200">
       {/* ── Hero: profile · bio · news ── */}
-      {/* At xl the three columns get explicit widths so the profile column stops
+      {/* From lg the three columns get explicit widths so the profile column stops
           hogging space it never fills and News gets room to breathe. */}
-      <div className="grid grid-cols-1 gap-8 py-8 md:grid-cols-12 md:gap-x-8 xl:grid-cols-[minmax(0,17rem)_minmax(0,1fr)_minmax(0,21rem)]">
+      <div className="grid grid-cols-1 gap-8 py-8 md:grid-cols-12 md:gap-x-8 lg:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_minmax(0,19rem)]">
         {/* Profile */}
-        <div className="flex items-center gap-5 md:col-span-4 md:block xl:col-span-1">
+        <div className="flex items-center gap-5 md:col-span-4 md:block lg:col-span-1">
           {avatar && (
             <Image
               src={avatar}
@@ -95,7 +95,7 @@ export default function Home() {
         </div>
 
         {/* Bio */}
-        <div className="md:col-span-8 xl:col-span-1">
+        <div className="md:col-span-8 lg:col-span-1">
           <div className="prose prose-sm max-w-none">
             <MDXLayoutRenderer code={author.body.code} />
           </div>
@@ -103,7 +103,7 @@ export default function Home() {
 
         {/* News */}
         {sortedNews.length > 0 && (
-          <div className="border-t border-gray-200 pt-8 md:col-span-12 xl:col-span-1 xl:border-t-0 xl:pl-8 xl:pt-0">
+          <div className="border-t border-gray-200 pt-8 md:col-span-12 lg:col-span-1 lg:border-t-0 lg:pl-8 lg:pt-0">
             <h2 className="mb-4 text-xl font-extrabold leading-7 tracking-tight text-gray-900">
               News
             </h2>

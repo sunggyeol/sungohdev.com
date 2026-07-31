@@ -32,12 +32,12 @@ export default function NewsPreview({
         {displayNews.map((item, index) => (
           <div key={`${item.slug}-${index}`}>
             <p
-              className={`text-sm leading-relaxed text-gray-700 ${compact ? "xl:text-xs" : ""}`}
+              className={`text-sm leading-relaxed text-gray-700 ${compact ? "lg:text-xs" : ""}`}
             >
               {item.content}
             </p>
             <span
-              className={`mt-0.5 block text-xs font-medium tabular-nums text-gray-400 ${compact ? "xl:text-[11px]" : ""}`}
+              className={`mt-0.5 block text-xs font-medium tabular-nums text-gray-400 ${compact ? "lg:text-[11px]" : ""}`}
             >
               {formatNewsDate(item.date)}
             </span>
@@ -49,7 +49,7 @@ export default function NewsPreview({
         <div className="mt-5">
           <Link
             href="/news"
-            className={`text-sm font-medium text-primary-500 hover:text-primary-600 ${compact ? "xl:text-xs" : ""}`}
+            className={`text-sm font-medium text-primary-500 hover:text-primary-600 ${compact ? "lg:text-xs" : ""}`}
           >
             See more &rarr;
           </Link>

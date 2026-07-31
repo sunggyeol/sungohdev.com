@@ -35,17 +35,17 @@ export default function PublicationEntry({ pub }: { pub: Publications }) {
   const primaryLink = links.find((l) => l.type === "DOI") ?? links[0];
 
   return (
-    <article className="flex flex-col gap-1.5 sm:flex-row sm:gap-8">
+    <article className="flex flex-col gap-1.5 sm:flex-row sm:gap-6">
       {/* Venue rail. Left-aligned so every acronym shares one edge, and given
           the title's 22px line box so the two baselines sit level. */}
       <div className="shrink-0 sm:w-20">
-        <span className="text-sm font-bold uppercase leading-6 tracking-wider text-primary-500">
+        <span className="text-xs font-bold uppercase leading-6 tracking-wider text-primary-500">
           {pub.venue}
         </span>
       </div>
 
-      <div className="min-w-0 max-w-3xl flex-1">
-        <h3 className="text-base font-semibold leading-snug tracking-tight">
+      <div className="min-w-0 max-w-4xl flex-1">
+        <h3 className="text-[15px] font-semibold leading-snug tracking-tight">
           {primaryLink ? (
             <a
               href={primaryLink.url}
@@ -60,18 +60,18 @@ export default function PublicationEntry({ pub }: { pub: Publications }) {
           )}
         </h3>
 
-        <p className="mt-1 text-sm leading-normal text-gray-600">
+        <p className="mt-0.5 text-[13px] leading-snug text-gray-600">
           {boldMyName(pub.authors)}
         </p>
 
         {/* The venue of record: the proceedings or journal you would cite. */}
         {pub.publishedIn && (
-          <p className="mt-1 text-sm italic leading-normal text-gray-500">
+          <p className="mt-0.5 text-[13px] italic leading-snug text-gray-500">
             {pub.publishedIn}
           </p>
         )}
 
-        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
           <span
             className={`rounded px-2 py-[3px] text-[11px] font-semibold uppercase tracking-wide ${CHIP}`}
           >

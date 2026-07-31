@@ -14,7 +14,7 @@ export default function PublicationLayout({
   return (
     <>
       <div className="divide-y divide-gray-200">
-        <div className="space-y-2 pb-6 pt-6 md:space-y-3">
+        <div className="space-y-2 pb-3 pt-4 md:space-y-3">
           <h1 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 sm:text-2xl sm:leading-8">
             {title}
           </h1>
@@ -22,7 +22,7 @@ export default function PublicationLayout({
             <p className="text-base leading-6 text-gray-500">{description}</p>
           )}
         </div>
-        <div className="pb-6 pt-6">{children}</div>
+        <div className="pb-6 pt-4">{children}</div>
       </div>
     </>
   );

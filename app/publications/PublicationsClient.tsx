@@ -50,7 +50,7 @@ export default function PublicationsClient({
     <>
       {/* Filters — hidden when everything falls into a single family */}
       {filters.length > 2 && (
-        <div className="mb-7 flex flex-wrap items-center gap-2 text-sm">
+        <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
           {filters.map((f) => (
             <button
               key={f.key}
@@ -81,19 +81,19 @@ export default function PublicationsClient({
           </p>
         </div>
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-5">
           {sortedYears.map((year) => (
             <section key={year}>
               {/* The year sits in the same left column as the venue labels, so
                   scanning down reads "2026 / CHI", "2025 / FIE", ... */}
-              <div className="mb-4 flex items-center gap-4 sm:gap-8">
+              <div className="mb-2 flex items-center gap-4 sm:gap-6">
                 <h2 className="shrink-0 font-mono text-lg font-bold tabular-nums text-gray-900 sm:w-20">
                   {year}
                 </h2>
                 <div className="h-px flex-1 bg-gray-200" />
               </div>
 
-              <div className="space-y-5">
+              <div className="space-y-3">
                 {groupedByYear[year].map((pub) => (
                   <PublicationEntry
                     key={`${pub.title}-${pub.year}`}
