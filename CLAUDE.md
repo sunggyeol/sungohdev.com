@@ -66,40 +66,38 @@ Contentlayer processes MDX files into typed objects accessible at build time. Co
 
 - `data/siteMetadata.js` - Site-wide settings (title, author, analytics, comments)
 - `data/headerNavLinks.ts` - Navigation menu items
-- `data/projectsData.ts` - Project card data (if not using MDX files)
+- `data/publicationTypes.ts` - Publication contribution/track labels
 
 ### App Structure (Next.js App Router)
 
 ```
 app/
-├── layout.tsx          # Root layout with theme and metadata
-├── Main.tsx            # Main wrapper component
+├── layout.tsx          # Root layout and metadata
+├── Main.tsx            # Landing page content (profile, bio, news, publications)
 ├── page.tsx            # Home page
-├── about/              # About page
+├── not-found.tsx       # 404 page
+├── news/               # News listing
 ├── publications/       # Publications listing
-├── projects/           # Projects listing
-└── api/                # API routes (if any)
+└── projects/           # Projects listing
 ```
+
+There are no API routes; every page is statically prerendered.
 
 ### Components
 
-- `components/` - Reusable React components (Header, Footer, Card, etc.)
-- `layouts/` - Layout templates:
-  - `AuthorLayout.tsx` - For author pages
-  - `PublicationsLayout.tsx` - For publication lists
-- `components/MDXComponents.tsx` - Custom components for MDX (Link, Image, etc.)
+- `components/` - Reusable React components (Header, Footer, Image, Link, etc.)
+- `layouts/PublicationsLayout.tsx` - Shared layout for the publications and news lists
 
 ### Styling
 
-- Tailwind CSS 3.0 with dark mode support
+- Tailwind CSS 3.0. The site is light-mode only — `darkMode: "class"` is set in
+  `tailwind.config.js` but no `dark:` variants are used.
 - `css/tailwind.css` - Main stylesheet
-- `css/prism.css` - Code block styling (syntax highlighting)
 - `tailwind.config.js` - Tailwind configuration
 
 ## Static Assets
 
 - `public/static/` - Images, favicons, and other static assets
-- `data/logo.svg` - Site logo
 
 ## Build & Deployment
 
@@ -127,7 +125,7 @@ For deployment with base path:
 EXPORT=1 UNOPTIMIZED=1 BASE_PATH=/myblog pnpm build
 ```
 
-**Note:** Static exports cannot use server-side features. Comment out `headers()` in `next.config.js` and remove API routes.
+**Note:** Static exports cannot use server-side features. Comment out `headers()` and `redirects()` in `next.config.js` — both are no-ops under `output: "export"`.
 
 ### Deployment Platforms
 

@@ -68,9 +68,16 @@ export default function Home() {
             <Image
               src={avatar}
               alt="avatar"
-              width={512}
-              height={512}
-              className="h-28 w-28 shrink-0 rounded-lg object-cover md:mx-auto md:mb-4 md:h-56 md:w-56"
+              width={224}
+              height={224}
+              /* The box is 112px until md, 224px from md up. Spelling that out
+                 keeps the browser from falling back to the 100vw default and
+                 pulling a ~1080px render for a thumbnail-sized slot. */
+              sizes="(min-width: 768px) 224px, 112px"
+              /* Topmost image on the landing page — preload it instead of
+                 letting the lazy loader discover it after hydration. */
+              priority
+              className="h-28 w-28 shrink-0 rounded-lg bg-gray-100 object-cover md:mx-auto md:mb-4 md:h-56 md:w-56"
             />
           )}
           <div className="min-w-0 md:text-center">
