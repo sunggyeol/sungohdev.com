@@ -1,12 +1,15 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import Link from "./Link";
 import headerNavLinks from "@/data/headerNavLinks";
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
+  // Focus the panel itself on open. Without this, Headless UI's focus trap
+  // focuses the first link, which Safari paints with a focus ring.
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -41,7 +44,12 @@ const MobileNav = () => {
         </svg>
       </button>
       <Transition appear show={navShow} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={onToggleNav}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={onToggleNav}
+          initialFocus={panelRef}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -65,7 +73,11 @@ const MobileNav = () => {
                 leaveFrom="translate-x-0 opacity-95"
                 leaveTo="translate-x-full opacity-0"
               >
-                <Dialog.Panel className="fixed left-0 top-0 z-10 h-full w-full bg-white opacity-95 duration-300">
+                <Dialog.Panel
+                  ref={panelRef}
+                  tabIndex={-1}
+                  className="fixed left-0 top-0 z-10 h-full w-full bg-white opacity-95 outline-none duration-300"
+                >
                   <nav className="fixed mt-8 h-full text-left">
                     {headerNavLinks
                       .filter((link) => link.href !== "/")
