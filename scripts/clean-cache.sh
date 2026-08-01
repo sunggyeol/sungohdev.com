@@ -4,10 +4,27 @@
 
 set -e  # Exit on error
 
+FORCE=0
+for arg in "$@"; do
+  [ "$arg" = "--force" ] && FORCE=1
+done
+
 # Always resolve to the physical path to avoid contentlayer2 path bugs
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd -P)"
 cd "$PROJECT_ROOT" || exit 1
+
+# `next dev` serves live out of .next and .contentlayer. Deleting them from
+# under a running dev server makes it 404 its own CSS chunks -- the page loses
+# all styling and SVG icons balloon to full size -- and often kills it outright
+# with "Cannot find module for page: /_document". Both predev and prebuild call
+# this script, so an unguarded `rm -rf` here breaks any dev server left open.
+if [ "$FORCE" -eq 0 ] && pgrep -f 'next-server|next dev' >/dev/null 2>&1; then
+  echo "Dev server is running -- skipping cache cleanup so it keeps serving."
+  echo "  Clean anyway:  stop the dev server, or 'pnpm clean:contentlayer -- --force'"
+  echo "  Build safely:  pnpm build:isolated   (builds into .next-build)"
+  exit 0
+fi
 
 echo "Cleaning caches in: $PROJECT_ROOT"
 

@@ -12,6 +12,7 @@
     "clean:contentlayer": "bash ./scripts/clean-cache.sh",
     "prebuild": "bash ./scripts/ensure-clean-start.sh",
     "build": "bash ./scripts/run-from-physical-path.sh cross-env NODE_NO_WARNINGS=1 next build && bash ./scripts/run-from-physical-path.sh cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
+    "build:isolated": "cross-env NEXT_DIST_DIR=.next-build pnpm build",
     "serve": "next start",
     "analyze": "bash ./scripts/run-from-physical-path.sh cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",

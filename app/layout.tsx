@@ -2,7 +2,7 @@ import "css/tailwind.css";
 import "remark-github-blockquote-alert/alert.css";
 import "./globals.css";
 
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics, AnalyticsConfig } from "pliny/analytics";
 import Header from "@/components/Header";
 import SectionContainer from "@/components/SectionContainer";
@@ -15,10 +15,10 @@ import {
   GoogleTagManagerBody,
 } from "@/components/GoogleTagManager";
 
-const space_grotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteMetadata.language}
-      className={`${space_grotesk.variable} scroll-smooth`}
+      className={`${inter.variable} scroll-smooth`}
     >
       <head>
         <GoogleTagManagerHead />

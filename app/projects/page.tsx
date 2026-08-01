@@ -1,3 +1,4 @@
+import PageLayout from "@/layouts/PageLayout";
 import { genPageMetadata } from "app/seo";
 import { allProjects, allPublications } from "contentlayer/generated";
 import ProjectsClient from "./ProjectsClient";
@@ -16,16 +17,8 @@ export default function Projects() {
   const publications = allPublications.filter((p) => p.draft !== true);
 
   return (
-    <div className="divide-y divide-gray-200">
-      <div className="space-y-2 pb-6 pt-6 md:space-y-3">
-        <h1 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 sm:text-2xl sm:leading-8">
-          Projects
-        </h1>
-      </div>
-
-      <div className="py-8">
-        <ProjectsClient projects={sortedProjects} publications={publications} />
-      </div>
-    </div>
+    <PageLayout title="Projects">
+      <ProjectsClient projects={sortedProjects} publications={publications} />
+    </PageLayout>
   );
 }

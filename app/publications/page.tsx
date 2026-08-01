@@ -1,4 +1,4 @@
-import PublicationLayout from "@/layouts/PublicationsLayout";
+import PageLayout from "@/layouts/PageLayout";
 import { genPageMetadata } from "app/seo";
 import PublicationsClient from "./PublicationsClient";
 import { allPublications } from "contentlayer/generated";
@@ -27,8 +27,8 @@ export default function Page() {
     });
 
   return (
-    <PublicationLayout title="Publications">
+    <PageLayout title="Publications">
       <PublicationsClient publications={sortedPublications} />
-    </PublicationLayout>
+    </PageLayout>
   );
 }

@@ -103,7 +103,10 @@ export default function Home() {
 
         {/* Bio */}
         <div className="md:col-span-8 lg:col-span-1">
-          <div className="prose prose-sm max-w-none">
+          {/* prose-sm (14px) reads a touch small against the News column; the
+              explicit 15px nudges it up without jumping to prose's 16px base.
+              Prose spaces paragraphs in em, so the rhythm scales with it. */}
+          <div className="prose prose-sm max-w-none text-[0.9375rem]">
             <MDXLayoutRenderer code={author.body.code} />
           </div>
         </div>
@@ -111,7 +114,7 @@ export default function Home() {
         {/* News */}
         {sortedNews.length > 0 && (
           <div className="border-t border-gray-200 pt-8 md:col-span-12 lg:col-span-1 lg:border-t-0 lg:pl-8 lg:pt-0">
-            <h2 className="mb-4 text-xl font-extrabold leading-7 tracking-tight text-gray-900">
+            <h2 className="mb-4 text-lg font-semibold leading-7 tracking-tight text-gray-900">
               News
             </h2>
             <NewsPreview news={sortedNews} maxDisplay={4} compact />
@@ -122,7 +125,7 @@ export default function Home() {
       {/* ── Publications ── */}
       <div className="py-8">
         <div className="space-y-2 pb-6 md:space-y-3">
-          <h2 className="text-xl font-extrabold leading-7 tracking-tight text-gray-900 sm:text-2xl sm:leading-8">
+          <h2 className="text-lg font-semibold leading-7 tracking-tight text-gray-900 sm:text-xl sm:leading-8">
             Recent Publications
           </h2>
         </div>

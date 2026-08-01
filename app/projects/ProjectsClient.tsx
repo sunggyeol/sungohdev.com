@@ -140,7 +140,7 @@ export default function ProjectsClient({
               )}
 
               <div className="flex-1">
-                <h2 className="text-lg font-semibold leading-tight">
+                <h2 className="text-base font-semibold leading-tight">
                   {project.href ? (
                     <Link
                       href={project.href}
@@ -154,7 +154,7 @@ export default function ProjectsClient({
                   )}
                 </h2>
 
-                <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
+                <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-gray-500">
                   {project.description}
                 </p>
 

@@ -66,6 +66,9 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     output,
     basePath,
+    // Defaults to .next so Vercel is unaffected. Set NEXT_DIST_DIR to build
+    // somewhere else and leave a running `next dev` untouched.
+    distDir: process.env.NEXT_DIST_DIR || ".next",
     reactStrictMode: true,
     pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
     eslint: {

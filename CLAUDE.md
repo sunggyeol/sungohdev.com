@@ -86,7 +86,7 @@ There are no API routes; every page is statically prerendered.
 ### Components
 
 - `components/` - Reusable React components (Header, Footer, Image, Link, etc.)
-- `layouts/PublicationsLayout.tsx` - Shared layout for the publications and news lists
+- `layouts/PageLayout.tsx` - Shared title/description shell for the news, publications, and projects pages
 
 ### Styling
 

@@ -9,9 +9,7 @@ const Header = () => {
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
           {typeof siteMetadata.headerTitle === "string" ? (
-            <div className="text-2xl font-semibold">
-              {siteMetadata.headerTitle}
-            </div>
+            <div className="text-2xl font-bold">{siteMetadata.headerTitle}</div>
           ) : (
             siteMetadata.headerTitle
           )}

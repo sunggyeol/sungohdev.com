@@ -1,4 +1,4 @@
-import PublicationLayout from "@/layouts/PublicationsLayout";
+import PageLayout from "@/layouts/PageLayout";
 import { genPageMetadata } from "app/seo";
 import NewsPreview from "@/components/NewsPreview";
 import { allNews } from "contentlayer/generated";
@@ -11,9 +11,9 @@ export default function Page() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <PublicationLayout title="News">
+    <PageLayout title="News">
       {/* No maxDisplay — render the full archive. */}
       <NewsPreview news={sortedNews} />
-    </PublicationLayout>
+    </PageLayout>
   );
 }
