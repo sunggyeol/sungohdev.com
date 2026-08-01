@@ -11,6 +11,17 @@ interface ProjectsClientProps {
   publications: Publications[];
 }
 
+// Widths the card image actually occupies, derived from SectionContainer's
+// max-width/padding ladder (max-w-3xl+px-4 → 5xl → 6xl → 7xl, all px-8 from lg)
+// halved for the `md:w-1/2` card. Without this, `fill` defaults to sizes="100vw"
+// and a 544px slot on a 2x laptop downloads the 3840px render.
+const CARD_IMAGE_SIZES =
+  "(min-width: 1536px) 608px, (min-width: 1280px) 544px, (min-width: 1024px) 480px, (min-width: 768px) 360px, calc(100vw - 32px)";
+
+// Cards that are plausibly above the fold on first paint; these skip the lazy
+// loader so the LCP candidate is requested with the document, not after it.
+const EAGER_CARDS = 2;
+
 export default function ProjectsClient({
   projects,
   publications,
@@ -68,7 +79,7 @@ export default function ProjectsClient({
 
       {/* Project Cards */}
       <div className="divide-y divide-gray-200 md:divide-y-0 md:space-y-1">
-        {filteredProjects.map((project) => {
+        {filteredProjects.map((project, index) => {
           const relatedPubs =
             project.relatedPublications
               ?.map((slug) => publications.find((pub) => pub.slug === slug))
@@ -100,7 +111,7 @@ export default function ProjectsClient({
               className="group flex flex-col gap-4 py-8 first:pt-0 md:flex-row md:gap-6"
             >
               {project.imgSrc && (
-                <div className="relative aspect-[16/10] w-full shrink-0 self-start overflow-hidden rounded-md shadow-[0_0_0_1px_rgba(0,0,0,0.06)] md:w-1/2">
+                <div className="relative aspect-[16/10] w-full shrink-0 self-start overflow-hidden rounded-md bg-gray-100 shadow-[0_0_0_1px_rgba(0,0,0,0.06)] md:w-1/2">
                   {project.href ? (
                     <Link
                       href={project.href}
@@ -111,6 +122,8 @@ export default function ProjectsClient({
                         src={project.imgSrc}
                         className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                         fill
+                        sizes={CARD_IMAGE_SIZES}
+                        priority={index < EAGER_CARDS}
                       />
                     </Link>
                   ) : (
@@ -119,6 +132,8 @@ export default function ProjectsClient({
                       src={project.imgSrc}
                       className="object-cover transition-transform duration-200 group-hover:scale-[1.02]"
                       fill
+                      sizes={CARD_IMAGE_SIZES}
+                      priority={index < EAGER_CARDS}
                     />
                   )}
                 </div>
