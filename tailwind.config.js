@@ -24,19 +24,31 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
       },
+      // One radius for every squared-off surface on the site — filter buttons,
+      // the venue chip, project thumbnails, the avatar. 8px is soft enough to
+      // read as intentional rather than a default 4px, and still square enough
+      // to sit with the rules and left-aligned text blocks everywhere else.
+      // Use `rounded-ui`; do not reach for rounded/md/lg/full directly.
+      borderRadius: {
+        ui: "0.5rem",
+      },
       colors: {
+        // Neutral ink ramp. The site reads as black-and-gray, so `primary` is
+        // not a hue — it is the dark end of the gray scale, shifted so that
+        // primary-500 lands on gray-700 (#374151), the weight the social icons
+        // already used. Anything that was navy now resolves to that ink.
         primary: {
-          50: "#ecedf5",
-          100: "#d9dbeb",
-          200: "#b3b7d7",
-          300: "#8d93c3",
-          400: "#6269a9",
-          500: "#313567",
-          600: "#2a2d58",
-          700: "#222549",
-          800: "#1b1d3a",
-          900: "#13152b",
-          950: "#0c0d1c",
+          50: "#f9fafb",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          300: "#9ca3af",
+          400: "#4b5563",
+          500: "#374151",
+          600: "#1f2937",
+          700: "#111827",
+          800: "#0d121c",
+          900: "#080b12",
+          950: "#000000",
         },
         gray: colors.gray,
       },
@@ -58,7 +70,7 @@ module.exports = {
               fontWeight: "600",
             },
             code: {
-              color: theme("colors.indigo.500"),
+              color: theme("colors.gray.800"),
             },
           },
         },

@@ -35,6 +35,16 @@ export default function NewsPreview({
               className={`text-sm leading-relaxed text-gray-700 ${compact ? "lg:text-xs" : ""}`}
             >
               {item.content}
+              {item.flag && (
+                // Trailing, and non-breaking so the flag never wraps alone onto
+                // a line of its own. aria-hidden because the sentence already
+                // names the place — a screen reader saying "flag: Spain" after
+                // "Barcelona, Spain" is just noise.
+                <span aria-hidden="true">
+                  {" "}
+                  {item.flag}
+                </span>
+              )}
             </p>
             <span
               className={`mt-0.5 block text-xs font-medium tabular-nums text-gray-400 ${compact ? "lg:text-[11px]" : ""}`}

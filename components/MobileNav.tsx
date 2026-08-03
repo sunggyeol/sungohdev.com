@@ -82,10 +82,10 @@ const MobileNav = () => {
                     {headerNavLinks
                       .filter((link) => link.href !== "/")
                       .map((link) => (
-                        <div key={link.title} className="px-12 py-4">
+                        <div key={link.title} className="px-12 py-3">
                           <Link
                             href={link.href}
-                            className="text-2xl font-bold tracking-widest text-gray-900 hover:text-primary-500"
+                            className="text-xl font-semibold tracking-tight text-gray-900 hover:text-primary-500"
                             onClick={onToggleNav}
                           >
                             {link.title}

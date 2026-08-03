@@ -6,7 +6,6 @@ import { Inter } from "next/font/google";
 import { Analytics, AnalyticsConfig } from "pliny/analytics";
 import Header from "@/components/Header";
 import SectionContainer from "@/components/SectionContainer";
-import Footer from "@/components/Footer";
 import siteMetadata from "@/data/siteMetadata";
 import { Metadata } from "next";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
@@ -94,7 +93,7 @@ export default function RootLayout({
         <link
           rel="mask-icon"
           href="/static/favicons/safari-pinned-tab.svg"
-          color="#5bbad5"
+          color="#374151"
         />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#fff" />
@@ -108,8 +107,7 @@ export default function RootLayout({
         <SectionContainer>
           <div className="flex min-h-screen flex-col justify-between font-sans">
             <Header />
-            <main className="mb-auto">{children}</main>
-            <Footer />
+            <main className="mb-auto pb-16">{children}</main>
           </div>
         </SectionContainer>
         <VercelAnalytics />

@@ -1,11 +1,18 @@
 import { Publications } from "contentlayer/generated";
 import { getContribution } from "@/data/publicationTypes";
 
-// One chip treatment for every contribution type — the label does the work, no
-// implied ranking between a full paper and a poster. Tailwind utilities live
-// here rather than in data/publicationTypes.ts because tailwind.config.js only
-// scans data/**/*.mdx, so classes in a data/*.ts file are never generated.
-const CHIP = "bg-gray-100 text-gray-600";
+// Shared type spec for the metadata row, so the chip and the bare label sit on
+// one baseline instead of drifting a pixel apart.
+const META = "text-[11px] font-bold uppercase tracking-wider";
+
+// The chip goes on the venue, not the contribution. Venue acronyms are three
+// or four characters and near-uniform in width, so they tile evenly down the
+// page; contribution labels run from "Poster" to "Student Research
+// Competition", and boxing those produced wildly uneven blocks. Tailwind
+// utilities live here rather than in data/publicationTypes.ts because
+// tailwind.config.js only scans data/**/*.mdx, so classes in a data/*.ts file
+// are never generated.
+const CHIP = "bg-gray-100 text-gray-700";
 
 export function boldMyName(authorsString: string) {
   const parts = authorsString.split("Sunggyeol Oh");
@@ -35,16 +42,8 @@ export default function PublicationEntry({ pub }: { pub: Publications }) {
   const primaryLink = links.find((l) => l.type === "DOI") ?? links[0];
 
   return (
-    <article className="flex flex-col gap-1.5 sm:flex-row sm:gap-6">
-      {/* Venue rail. Left-aligned so every acronym shares one edge, and given
-          the title's 22px line box so the two baselines sit level. */}
-      <div className="shrink-0 sm:w-20">
-        <span className="text-xs font-bold uppercase leading-6 tracking-wider text-primary-500">
-          {pub.venue}
-        </span>
-      </div>
-
-      <div className="min-w-0 max-w-4xl flex-1">
+    <article>
+      <div className="min-w-0 max-w-4xl">
         <h3 className="text-[15px] font-semibold leading-snug tracking-tight">
           {primaryLink ? (
             <a
@@ -71,12 +70,15 @@ export default function PublicationEntry({ pub }: { pub: Publications }) {
           </p>
         )}
 
+        {/* Venue acronym leads the row, then the track, then the links — the
+            whole entry reads top-to-bottom in one column now, so this line
+            carries the metadata the old left rail used to hold. */}
         <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <span
-            className={`rounded px-2 py-[3px] text-[11px] font-semibold uppercase tracking-wide ${CHIP}`}
-          >
-            {contribution.label}
+          <span className={`rounded-ui px-2 py-[3px] ${META} ${CHIP}`}>
+            {pub.venue}
           </span>
+
+          <span className={`${META} text-gray-500`}>{contribution.label}</span>
 
           {links.map((link) => (
             <a

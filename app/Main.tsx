@@ -77,7 +77,7 @@ export default function Home() {
               /* Topmost image on the landing page — preload it instead of
                  letting the lazy loader discover it after hydration. */
               priority
-              className="h-28 w-28 shrink-0 rounded-lg bg-gray-100 object-cover md:mx-auto md:mb-4 md:h-56 md:w-56"
+              className="h-28 w-28 shrink-0 rounded-ui bg-gray-100 object-cover md:mx-auto md:mb-4 md:h-56 md:w-56"
             />
           )}
           <div className="min-w-0 md:text-center">

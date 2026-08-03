@@ -3,13 +3,16 @@
 // Three orthogonal facts describe a publication, and conflating them is what
 // makes academic venue lists confusing:
 //
-//   venue        the conference (left rail)  "CHI", "VIS", "FIE", "CSCW"
+//   venue        the conference              "CHI", "VIS", "FIE", "CSCW"
 //   contribution what kind of work it is     full paper, poster, SRC, ...
 //   publishedIn  the venue of record         "Extended Abstracts of the..."
 //
+// `contribution` is what the left rail renders; the conference is already named
+// in full on the publishedIn line, so repeating its acronym earned nothing.
+//
 // Keeping `publishedIn` separate is what untangles IEEE VIS: a full paper is
 // published in TVCG while a short paper goes to the VIS proceedings, even
-// though both share venue "VIS". The contribution chip names the track.
+// though both share venue "VIS". The contribution label names the track.
 //
 // Tailwind class names deliberately live in components/PublicationEntry.tsx,
 // not here: tailwind.config.js only scans data/**/*.mdx, so utility classes in

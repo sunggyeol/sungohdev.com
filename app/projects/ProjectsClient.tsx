@@ -59,7 +59,7 @@ export default function ProjectsClient({
           <button
             key={f.key}
             onClick={() => setFilter(f.key)}
-            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
+            className={`inline-flex items-center gap-1.5 rounded-ui px-3 py-1 font-medium transition-colors ${
               filter === f.key
                 ? "bg-primary-500 text-white"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -108,10 +108,13 @@ export default function ProjectsClient({
           return (
             <div
               key={project.title}
-              className="group flex flex-col gap-4 py-8 first:pt-0 md:flex-row md:gap-6"
+              className="flex flex-col gap-4 py-8 first:pt-0 md:flex-row md:gap-6"
             >
               {project.imgSrc && (
-                <div className="relative aspect-[16/10] w-full shrink-0 self-start overflow-hidden rounded-md bg-gray-100 shadow-[0_0_0_1px_rgba(0,0,0,0.06)] md:w-1/2">
+                /* `group` sits on the image frame, not the whole card row, so
+                   the zoom only fires when the cursor is actually over the
+                   image — hovering the title or the tech list left it still. */
+                <div className="group relative aspect-[16/10] w-full shrink-0 self-start overflow-hidden rounded-ui bg-gray-100 shadow-[0_0_0_1px_rgba(0,0,0,0.06)] md:w-1/2">
                   {project.href ? (
                     <Link
                       href={project.href}

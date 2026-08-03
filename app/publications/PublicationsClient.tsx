@@ -55,7 +55,7 @@ export default function PublicationsClient({
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition-colors ${
+              className={`inline-flex items-center gap-1.5 rounded-ui px-3 py-1 font-medium transition-colors ${
                 filter === f.key
                   ? "bg-primary-500 text-white"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -84,10 +84,11 @@ export default function PublicationsClient({
         <div className="space-y-5">
           {sortedYears.map((year) => (
             <section key={year}>
-              {/* The year sits in the same left column as the venue labels, so
-                  scanning down reads "2026 / CHI", "2025 / FIE", ... */}
-              <div className="mb-2 flex items-center gap-4 sm:gap-6">
-                <h2 className="shrink-0 font-mono text-lg font-bold tabular-nums text-gray-900 sm:w-20">
+              {/* Entries are a single column now, so the year no longer pads
+                  out to a rail width — it hugs its digits and the rule takes
+                  the rest of the line. */}
+              <div className="mb-2 flex items-center gap-4">
+                <h2 className="shrink-0 font-mono text-lg font-bold tabular-nums text-gray-900">
                   {year}
                 </h2>
                 <div className="h-px flex-1 bg-gray-200" />

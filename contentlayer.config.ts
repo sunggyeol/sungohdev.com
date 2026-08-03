@@ -181,6 +181,9 @@ export const News = defineDocumentType(() => ({
   fields: {
     date: { type: "date", required: true }, // Date of the news
     content: { type: "string", required: true }, // One sentence news content
+    // Emoji flag of where it happened. Optional — news with no place (an award,
+    // a paper acceptance) simply omits it and renders without one.
+    flag: { type: "string" },
     draft: { type: "boolean" },
   },
   computedFields: {
